@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Samples/Home/Scenes/Home.unity
+    guid: 1bba4cece25a3458f8d2983b1cd85e83
+  - enabled: 1
+    path: Assets/Samples/Depth/Scenes/DepthOcclusion.unity
+    guid: 0d0f8927903d84af3b21ddede8358fcc
+  - enabled: 1
+    path: Assets/Samples/Depth/Scenes/DepthDisplay.unity
+    guid: a7c2694f3359d46a8acf408d66801c84
+  - enabled: 1
+    path: Assets/Samples/GameBoard/Scenes/Gameboard.unity
+    guid: a06c30b00ed554db68bfe3b791e59681
+  - enabled: 1
+    path: Assets/Samples/Meshing/Scenes/NormalMeshes.unity
+    guid: 2c0c87824fb144caf906bc9617676a4a
+  - enabled: 1
+    path: Assets/Samples/PersistentAR/Scenes/PersistentAR.unity
+    guid: cdd6a99ef030b43f78bb5b19cce5f58b
+  - enabled: 1
+    path: Assets/Samples/Semantics/Scenes/SemanticsDisplay.unity
+    guid: b43e677e36f234310adf6553404abbe5
+  - enabled: 1
+    path: Assets/Samples/PersistentAR/Scenes/VPSCoreFunctionality.unity
+    guid: e0adf21999c8d4d949ff3a48c1641bca
+  - enabled: 1
+    path: Assets/Samples/PersistentAR/Scenes/VPSInternalTestScene.unity
+    guid: 492b6239ad90249819e5699a0bf668ff
+  - enabled: 1
+    path: Assets/Samples/VPSCoverage/Scenes/VpsCoverageListExample.unity
+    guid: 6f69a0dede5c14986bb7d2591de029c8
+  - enabled: 1
+    path: Assets/Samples/PersistentAR/Scenes/VPSLocalization.unity
+    guid: 4d27e438dba0e4b118ee8e3a35ce3fa6
+  m_configObjects:
+    Niantic.Lightship.AR.LightshipSettings: {fileID: 11400000, guid: 05b0489c7d3114fe3b5a5321c06a66dd, type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 0ba5772da672041b0b49b09b47e32b89, type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: bfd7813fb960643da9fd42f1589db513, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 217d86e680eb34b97bb0bb2a6ec7bfac, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 35d0a95eeda964a40a7be7be884e643f, type: 2}

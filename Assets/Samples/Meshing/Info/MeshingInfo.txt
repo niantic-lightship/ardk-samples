@@ -1,0 +1,5 @@
+This scene generates a mesh of your surroundings.
+
+<b>Instructions</b>:
+
+Just move your camera around, a mesh should generate around all the objects and planes detected.

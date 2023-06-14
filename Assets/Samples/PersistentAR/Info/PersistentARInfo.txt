@@ -1,0 +1,9 @@
+In this example, we'll localize to a VPS activated wayspot and load a green cube at the mesh's origin.
+
+<b>Instructions</b>
+Add your API key in the Lightship>Settings menu.
+Navigate to the <i>Geospatial Browser</i> and copy an anchor payload or Blob of your choice, for a private or public wayspot. 
+Within the Persistent Anchor scene hierarchy, navigate to XROrigin, and in the  <i>AR Location Manager</i> component click on <i>Add AR Location</i>
+This will create a new AR Location object, with the AR Location script, paste the Blob into the <i>Payload</i> section.
+Build to device.
+Physically go to the location you’ve chosen and localize to the wayspot you selected in GSB.
