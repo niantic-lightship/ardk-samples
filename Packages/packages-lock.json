@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.nianticlabs.lightship": {
-      "version": "file:ardk-next-3.0.0.232402-ext-no-lto-ardk-upm.tgz",
+      "version": "file:ardk-next-3.0.0.232402181107-ext-no-lto-ardk-upm.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
