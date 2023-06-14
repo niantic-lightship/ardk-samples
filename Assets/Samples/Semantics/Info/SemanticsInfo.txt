@@ -1,0 +1,3 @@
+In this example, We set up a shader that colors only what we recognize as part of the <i>semantic channel</i>.
+
+To start select a semantic channel from the drop down and try to find that on your phone camera.

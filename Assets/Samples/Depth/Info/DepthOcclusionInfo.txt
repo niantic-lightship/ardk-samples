@@ -1,0 +1,2 @@
+This example demonstrates occlusion based on depth.
+Move the camera around and see how the red cube gets occluded by real objects around you.

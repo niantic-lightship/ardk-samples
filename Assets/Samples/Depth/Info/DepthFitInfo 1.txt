@@ -1,0 +1,2 @@
+In this example, we create and render a depth buffer from the phone's camera, visible on the top left.
+You may also tap on the screen to place a cube and move around to see the depth occlusion.
