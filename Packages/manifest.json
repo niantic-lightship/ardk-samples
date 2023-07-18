@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "com.nianticlabs.lightship": "file:ardk-upm-3.0.0-beta.1.tgz",
+    "com.nianticlabs.lightship": "https://github.com/niantic-lightship/ardk-upm.git",
+    "com.nianticlabs.lightship.sharedar": "https://github.com/niantic-lightship/sharedar-upm.git",
     "com.unity.collab-proxy": "1.17.7",
     "com.unity.ide.rider": "3.0.18",
     "com.unity.ide.visualstudio": "2.0.17",

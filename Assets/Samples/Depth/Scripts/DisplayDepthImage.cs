@@ -1,4 +1,4 @@
-using UnityEngine.UI;
+using Niantic.Lightship.AR.Utilities;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -24,11 +24,40 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField]
         float m_MaxEnvironmentDistance = 8.0f;
 
-        protected override void OnUpdateImage(RawImage image)
+        protected override void Awake()
         {
-            Debug.Assert(m_OcclusionManager != null, "No occlusion manager.");
-            image.texture = m_OcclusionManager.environmentDepthTexture;
-            image.material.SetFloat(k_MaxDistanceId, m_MaxEnvironmentDistance);
+            base.Awake();
+            Debug.Assert(m_OcclusionManager != null, "Missing occlusion manager component.");
+        }
+
+        /// <summary>
+        /// Invoked when it is time to update the presentation.
+        /// </summary>
+        /// <param name="viewportWidth">The width of the portion of the screen the image will be rendered onto.</param>
+        /// <param name="viewportHeight">The height of the portion of the screen the image will be rendered onto.</param>
+        /// <param name="orientation">The orientation of the screen.</param>
+        /// <param name="renderingMaterial">The material used to render the image.</param>
+        /// <param name="image">The image to render.</param>
+        /// <param name="displayMatrix">A transformation matrix to fit the image onto the viewport.</param>
+        protected override void OnUpdatePresentation(int viewportWidth, int viewportHeight, ScreenOrientation orientation,
+            Material renderingMaterial, out Texture image, out Matrix4x4 displayMatrix)
+        {
+            // Update the texture
+            image = m_OcclusionManager.environmentDepthTexture;
+
+            // Calculate the display matrix
+            displayMatrix = image != null
+                ? _CameraMath.CalculateDisplayMatrix(
+                    image.width,
+                    image.height,
+                    viewportWidth,
+                    viewportHeight,
+                    orientation,
+                    invertVertically: true)
+                : Matrix4x4.identity;
+
+            // Set custom attributes
+            renderingMaterial.SetFloat(k_MaxDistanceId, m_MaxEnvironmentDistance);
         }
     }
 }

@@ -6,4 +6,4 @@ Add your API key in the Lightship>Settings menu.
 (Local) Set a radius and tap <b>Request Areas</b>
 Choose a wayspot and tap the <i>Localize</i> button.
 Physically go to the location you’ve chosen and point the camera towards it.
-After a few seconds you should see the "Localized" message and a cube spawn at the wayspot origin.
+After a few seconds you should see the "Tracking" message and a cube spawn at the wayspot origin.

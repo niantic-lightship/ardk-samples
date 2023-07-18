@@ -6,52 +6,83 @@ using UnityEngine.XR.ARSubsystems;
 
 public class VPSLocalizeDemo : MonoBehaviour
 {
-    [SerializeField]
+    [Tooltip("VPS Coverage list manager")] [SerializeField]
     private VpsCoverageTargetListManager _vpsCoverageTargetListManager;
+    [Tooltip("The location manager")] [SerializeField]
+    private ARLocationManager _arLocationManager;
 
     [SerializeField]
-    private ARPersistentAnchorManager _persistentAnchorManager;
+    private Text _localizationStatusText;
 
     [SerializeField]
-    private Text _debugStatusText;
+    private GameObject _localizationStatusPanel;
 
-    private ARPersistentAnchor _arPersistentAnchor;
+    [SerializeField]
+    private GameObject _anchorMarkerPrefab;
 
-    void Start()
+    //Holder object for the AR location payload.
+    private GameObject _arLocationHolder;
+    private void Start()
     {
-        _persistentAnchorManager.arPersistentAnchorStateChanged += HandleLocationTrackingStateChanged;
-        _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed += OnWayspotSelected;  
-        
+        _arLocationManager.locationTrackingStateChanged += OnLocationTrackingStateChanged;
+        _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed += OnLocationSelected;
+
+        _arLocationHolder = new GameObject("ARLocation");
+        // The ARLocation will be enabled once the anchor starts tracking.
+        _arLocationHolder.SetActive(false);
+        _localizationStatusPanel.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed -= OnWayspotSelected;
+        _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed -= OnLocationSelected;
+        if (_arLocationHolder != null)
+        {
+            Destroy(_arLocationHolder);
+        }
     }
 
-    private void OnWayspotSelected(String defaultPayloadToSet)
+    private void OnLocationSelected(String defaultPayloadToSet)
     {
         if (String.IsNullOrEmpty(defaultPayloadToSet))
         {
-            Debug.LogWarning("The selected wayspot does not have a default anchor");
+            Debug.LogWarning("The selected location does not have a default anchor");
             return;
         }
-        var payload = new ARPersistentAnchorPayload(defaultPayloadToSet);
-        _persistentAnchorManager.TryTrackAnchor(payload, out _arPersistentAnchor);
+        // ARLocationManager must be a component of XR Origin and the ARLocation component must be in a child
+        // of it, and so here we set it up that way.
+        var _arLocation = _arLocationHolder.AddComponent<ARLocation>();
+        _arLocationHolder.transform.SetParent(_arLocationManager.transform);
+
+        if (_anchorMarkerPrefab)
+        {
+            // Add the anchor marker as a child of the ARLocation. This marker will be placed at
+            // the origin of the location's coordinate system.
+            var anchorMarker = Instantiate(_anchorMarkerPrefab);
+            anchorMarker.transform.SetParent(_arLocationHolder.transform);
+        }
+
+        //Once it is setup, we assign the payload and start tracking the ARLocation.
+        _arLocation.Payload = new ARPersistentAnchorPayload(defaultPayloadToSet);
+        _arLocationManager.StartTracking(_arLocation);
+
         _vpsCoverageTargetListManager.gameObject.SetActive(false);
-        _debugStatusText.text = "Wayspot selected";
+        Debug.Log("Location selected, ARLocation NOT TRACKING");
+        _localizationStatusText.text = "NOT TRACKING";
+        _localizationStatusPanel.SetActive(true);
     }
 
-    private void HandleLocationTrackingStateChanged(ARPersistentAnchorStateChangedEventArgs args)
+    private void OnLocationTrackingStateChanged(ARLocationTrackedEventArgs args)
     {
-         if (_arPersistentAnchor.trackingState == TrackingState.Tracking)
-        {
-            Debug.Log("VPS localized.");
-            _debugStatusText.text = "localized";
-        }
-        else
-        {
-            Debug.Log($"ARLocation not tracking?");
-        }
+         if (args.Tracking)
+         {
+            Debug.Log("ARLocation TRACKING");
+            _localizationStatusText.text = "TRACKING";
+         }
+         else
+         {
+             Debug.Log("ARLocation NOT TRACKING");
+             _localizationStatusText.text = "NOT TRACKING";
+         }
     }
 }
