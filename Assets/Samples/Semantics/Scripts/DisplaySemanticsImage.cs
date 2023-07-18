@@ -1,9 +1,9 @@
 using System.Linq;
 using Niantic.Lightship.AR.ARFoundation;
-using Niantic.Lightship.AR.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation.Samples;
+using UnityEngine.XR.ARSubsystems;
 
 namespace Niantic.Lightship.AR.Samples
 {
@@ -12,31 +12,76 @@ namespace Niantic.Lightship.AR.Samples
     /// </summary>
     public sealed class DisplaySemanticsImage : DisplayImage
     {
-        /// <summary>
-        /// Name of the display rotation matrix in the shader.
-        /// </summary>
-        const string k_SamplerMatrixName = "_SamplerMatrix";
-
-        /// <summary>
-        /// ID of the display matrix in the shader.
-        /// </summary>
-        private readonly int k_SamplerMatrix = Shader.PropertyToID(k_SamplerMatrixName);
-
         [SerializeField]
         [Tooltip("The ARSemanticSegmentationManager which will produce semantics textures.")]
-        ARSemanticSegmentationManager _semanticsManager;
+        private ARSemanticSegmentationManager _semanticsManager;
 
         [SerializeField]
-        Dropdown _channelDropdown;
+        private Dropdown _channelDropdown;
 
-        private string _semanticChannelName;
+        // The name of the actively selected semantic channel
+        private string _semanticChannelName = string.Empty;
+
+        // The texture to fill with confidence values of the selected channel
+        private Texture _texture;
 
         protected override void Awake()
         {
             base.Awake();
+            Debug.Assert(_semanticsManager != null, "Missing semantic segmentation manager component.");
+        }
 
-            Debug.Assert(_semanticsManager != null, "No semantic segmentation manager");
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            _semanticsManager.SemanticModelIsReady += SemanticsManager_OnSemanticModelIsReady;
+            _channelDropdown.onValueChanged.AddListener(ChannelDropdown_OnValueChanged);
+        }
 
+        private void OnDisable()
+        {
+            _semanticsManager.SemanticModelIsReady -= SemanticsManager_OnSemanticModelIsReady;
+            _channelDropdown.onValueChanged.RemoveListener(ChannelDropdown_OnValueChanged);
+        }
+
+        private void OnDestroy()
+        {
+            if (_texture != null)
+            {
+                Destroy(_texture);
+            }
+        }
+
+        /// <summary>
+        /// Invoked when it is time to update the presentation.
+        /// </summary>
+        /// <param name="viewportWidth">The width of the portion of the screen the image will be rendered onto.</param>
+        /// <param name="viewportHeight">The height of the portion of the screen the image will be rendered onto.</param>
+        /// <param name="orientation">The orientation of the screen.</param>
+        /// <param name="renderingMaterial">The material used to render the image.</param>
+        /// <param name="image">The image to render.</param>
+        /// <param name="displayMatrix">A transformation matrix to fit the image onto the viewport.</param>
+        protected override void OnUpdatePresentation(int viewportWidth, int viewportHeight,ScreenOrientation orientation,
+            Material renderingMaterial, out Texture image, out Matrix4x4 displayMatrix)
+        {
+            // Use the XRCameraParams type to describe the viewport to fit the semantics image to
+            var viewport = new XRCameraParams
+            {
+                screenWidth = viewportWidth, screenHeight = viewportHeight, screenOrientation = orientation
+            };
+
+            // Update the texture with the confidence values of the currently selected channel
+            _semanticsManager.GetSemanticChannelTexture(_semanticChannelName, viewport, ref _texture, out displayMatrix);
+
+            // Forward the image to display
+            image = _texture;
+        }
+
+        /// <summary>
+        /// Invoked when the semantic segmentation model is downloaded and ready for use.
+        /// </summary>
+        private void SemanticsManager_OnSemanticModelIsReady(ARSemanticModelReadyEventArgs args)
+        {
             // Initialize the channel names in the dropdown menu.
             var channelNames = _semanticsManager.SemanticChannelNames;
             _channelDropdown.AddOptions(channelNames);
@@ -47,78 +92,13 @@ namespace Niantic.Lightship.AR.Samples
             _channelDropdown.value = dropdownList.IndexOf(_semanticChannelName);
         }
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-
-            _channelDropdown.onValueChanged.AddListener(delegate
-            {
-                OnSemanticChannelDropdownValueChanged(_channelDropdown);
-            });
-        }
-
-        private void OnDisable()
-        {
-            _channelDropdown.onValueChanged.RemoveListener(delegate
-            {
-                OnSemanticChannelDropdownValueChanged(_channelDropdown);
-            });
-        }
-
-        protected override void Update()
-        {
-            Debug.Assert(m_RawImage != null, "no raw image");
-
-            // If the raw image needs to be updated because of a device orientation change or because of a texture
-            // aspect ratio difference, then update the raw image with the new values.
-            if (m_CurrentScreenOrientation != Screen.orientation)
-            {
-                m_CurrentScreenOrientation = Screen.orientation;
-                UpdateRawImage();
-            }
-
-            OnUpdateImage(m_RawImage);
-
-            if (m_RawImage.texture != null)
-            {
-                // Display some text information about each of the textures.
-                var displayTexture = m_RawImage.texture as Texture2D;
-                if (displayTexture != null)
-                {
-                    m_StringBuilder.Clear();
-                    BuildTextureInfo(m_StringBuilder, "env", displayTexture);
-                    LogText(m_StringBuilder.ToString());
-                }
-
-                // Calculate a transform to fit depth to the raw image
-                var sizeDelta = m_RawImage.rectTransform.sizeDelta;
-                var samplerMatrix = _CameraMath.CalculateDisplayMatrix(
-                    m_RawImage.texture.width,
-                    m_RawImage.texture.height,
-                    (int)sizeDelta.x,
-                    (int)sizeDelta.y,
-                    Screen.orientation,
-                    layout: _CameraMath.MatrixLayout.RowMajor
-                );
-
-                // Assign the sampler matrix (warp matrix * display matrix)
-                m_RawImage.material.SetMatrix(k_SamplerMatrix, samplerMatrix);
-            }
-        }
-
-        protected override void OnUpdateImage(RawImage image)
-        {
-            image.texture = _semanticsManager.GetSemanticChannelTexture(_semanticChannelName, out var samplerMatrix);
-        }
-
         /// <summary>
         /// Callback when the semantic channel dropdown UI has a value change.
         /// </summary>
-        /// <param name="channelDropdown">The dropdown UI that changed.</param>
-        void OnSemanticChannelDropdownValueChanged(Dropdown channelDropdown)
+        private void ChannelDropdown_OnValueChanged(int val)
         {
             // Update the display channel from the dropdown value.
-            _semanticChannelName = channelDropdown.options[channelDropdown.value].text;
+            _semanticChannelName = _channelDropdown.options[val].text;
         }
     }
 }

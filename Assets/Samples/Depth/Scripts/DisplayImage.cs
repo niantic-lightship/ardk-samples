@@ -68,7 +68,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 UpdateRawImage();
             }
 
-            OnUpdateImage(m_RawImage);
+            // Update the image
+            var sizeDelta = m_RawImage.rectTransform.sizeDelta;
+            OnUpdatePresentation(
+                viewportWidth: (int)sizeDelta.x,
+                viewportHeight: (int)sizeDelta.y,
+                orientation: m_CurrentScreenOrientation,
+                renderingMaterial: m_RawImage.material,
+                image: out var texture,
+                displayMatrix: out var displayMatrix);
+
+            m_RawImage.texture = texture;
+            m_RawImage.material.SetMatrix(k_DisplayMatrix, displayMatrix);
 
             if (m_RawImage.texture != null)
             {
@@ -80,24 +91,20 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     BuildTextureInfo(m_StringBuilder, "env", displayTexture);
                     LogText(m_StringBuilder.ToString());
                 }
-
-                // Calculate a transform to fit depth to the raw image
-                var sizeDelta = m_RawImage.rectTransform.sizeDelta;
-                var displayMatrix = _CameraMath.CalculateDisplayMatrix(
-                    m_RawImage.texture.width,
-                    m_RawImage.texture.height,
-                    (int)sizeDelta.x,
-                    (int)sizeDelta.y,
-                    Screen.orientation,
-                    layout: _CameraMath.MatrixLayout.RowMajor
-                );
-
-                // Assign the display matrix
-                m_RawImage.material.SetMatrix(k_DisplayMatrix, displayMatrix);
             }
         }
 
-        protected abstract void OnUpdateImage(RawImage image);
+        /// <summary>
+        /// Invoked when it is time to update the presentation.
+        /// </summary>
+        /// <param name="viewportWidth">The width of the portion of the screen the image will be rendered onto.</param>
+        /// <param name="viewportHeight">The height of the portion of the screen the image will be rendered onto.</param>
+        /// <param name="orientation">The orientation of the screen.</param>
+        /// <param name="renderingMaterial">The material used to render the image.</param>
+        /// <param name="image">The image to render.</param>
+        /// <param name="displayMatrix">A transformation matrix to fit the image onto the viewport.</param>
+        protected abstract void OnUpdatePresentation( int viewportWidth, int viewportHeight, ScreenOrientation orientation,
+            Material renderingMaterial, out Texture image, out Matrix4x4 displayMatrix);
 
         /// <summary>
         /// Create log information about the given texture.
@@ -105,7 +112,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <param name="stringBuilder">The string builder to which to append the texture information.</param>
         /// <param name="textureName">The semantic name of the texture for logging purposes.</param>
         /// <param name="texture">The texture for which to log information.</param>
-        static protected void BuildTextureInfo(StringBuilder stringBuilder, string textureName, Texture2D texture)
+        private static void BuildTextureInfo(StringBuilder stringBuilder, string textureName, Texture2D texture)
         {
             stringBuilder.AppendLine($"texture : {textureName}");
             if (texture == null)
@@ -125,7 +132,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// Log the given text to the screen if the image info UI is set. Otherwise, log the string to debug.
         /// </summary>
         /// <param name="text">The text string to log.</param>
-        protected void LogText(string text)
+        private void LogText(string text)
         {
             if (m_ImageInfo != null)
             {
@@ -140,7 +147,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <summary>
         /// Update the raw image with the current configurations.
         /// </summary>
-        protected void UpdateRawImage()
+        private void UpdateRawImage()
         {
             Debug.Assert(m_RawImage != null, "no raw image");
 

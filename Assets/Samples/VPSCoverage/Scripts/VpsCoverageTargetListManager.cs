@@ -27,6 +27,9 @@ public class VpsCoverageTargetListManager : MonoBehaviour
     [SerializeField] [Tooltip("Template item for target information")]
     private VpsCoverageTargetListItem _itemPrefab;
 
+    [SerializeField]
+    private int _maxItemInstances;
+
     [Header("UI Setup")] [SerializeField] [Tooltip("Button to request to reload the list")]
     private Button _requestButton;
 
@@ -118,8 +121,11 @@ public class VpsCoverageTargetListManager : MonoBehaviour
                 a.Area.Centroid.Distance(areaTargetsResult.QueryLocation).CompareTo(
                     b.Area.Centroid.Distance(areaTargetsResult.QueryLocation)));
 
-            foreach (var areaTarget in areaTargetsResult.AreaTargets)
+            var max = _maxItemInstances == 0 ? areaTargetsResult.AreaTargets.Count :
+                        Math.Min(_maxItemInstances, areaTargetsResult.AreaTargets.Count);
+            for (int i = 0; i < max; ++i)
             {
+                var areaTarget = areaTargetsResult.AreaTargets[i];
                 // The list object was destroyed, likely by exiting the scene
                 if (_scrollListContent == null)
                     return;

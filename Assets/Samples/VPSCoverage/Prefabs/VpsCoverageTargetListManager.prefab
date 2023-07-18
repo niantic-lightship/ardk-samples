@@ -1209,6 +1209,7 @@ MonoBehaviour:
   _mapApp: 0
   _scrollList: {fileID: 104039936893459965}
   _itemPrefab: {fileID: 976549462974995233, guid: 721d7386aa2e446ee8151352c68cd121, type: 3}
+  _maxItemInstances: 5
   _requestButton: {fileID: 104039936235051423}
   _requestStatusText: {fileID: 104039935867410905}
   _queryRadiusSlider: {fileID: 104039935322419718}
@@ -1235,10 +1236,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b90fbc7f7b5e4c3987d7bee5c04392a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useCurrentLocation: 1
-  queryRadius: 1000
-  queryLatitude: 0
-  queryLongitude: 0
+  _queryRadius: 1000
+  _privateARLocations: []
+  _useCurrentLocation: 1
+  _queryLatitude: 0
+  _queryLongitude: 0
+  _privateARLocalizationTargets: []
 --- !u!1 &104039936391771813
 GameObject:
   m_ObjectHideFlags: 0

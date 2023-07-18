@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Niantic.Lightship.AR;
 using Niantic.Lightship.AR.Loader;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +9,11 @@ public class SettingsDisplay : MonoBehaviour
     [SerializeField] private Toggle m_DepthEnabledToggle;
 
     [SerializeField] private Text m_DepthFramerateText;
+
+    [Header("Semantic Segmentation")]
+    [SerializeField] private Toggle m_SemanticsEnabledToggle;
+
+    [SerializeField] private Text m_SemanticsFramerateText;
 
     [Header("VPS")]
     [SerializeField] private Toggle m_VpsEnabledToggle;
@@ -30,10 +32,13 @@ public class SettingsDisplay : MonoBehaviour
         m_DepthEnabledToggle.isOn = settings.UseLightshipDepth;
         m_DepthFramerateText.text = $"Framerate: {settings.LightshipDepthFrameRate}";
 
+        m_SemanticsEnabledToggle.isOn = settings.UseLightshipSemanticSegmentation;
+        m_SemanticsFramerateText.text = $"Framerate: {settings.LightshipSemanticSegmentationFrameRate}";
+
         m_VpsEnabledToggle.isOn = settings.UseLightshipPersistentAnchor;
 
-        m_PlaybackOnEditorEnabledToggle.isOn = settings.UsePlaybackOnEditor;
-        m_PlaybackOnDeviceEnabledToggle.isOn = settings.UsePlaybackOnDevice;
+        m_PlaybackOnEditorEnabledToggle.isOn = settings.EditorPlaybackEnabled;
+        m_PlaybackOnDeviceEnabledToggle.isOn = settings.DevicePlaybackEnabled;
 
         var imageProcessingMode =
             PlayerPrefs.GetInt("ImageProcessMode", 0) == 0 ? "CPU" : "GPU";
