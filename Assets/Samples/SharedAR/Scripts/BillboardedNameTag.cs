@@ -135,9 +135,9 @@ namespace Niantic.Lightship.AR.Samples
                 {
                     VpsColocalizationDemo.Instance.HandleHostDisconnected();
                 }
-                else if (ImageTrackColocalizationDemo.Instance)
+                else if (ImageTrackingColocalizationDemo.Instance)
                 {
-                    ImageTrackColocalizationDemo.Instance.HandleHostDisconnected();
+                    ImageTrackingColocalizationDemo.Instance.HandleHostDisconnected();
                 }
             }
             base.OnNetworkDespawn();

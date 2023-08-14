@@ -30,36 +30,36 @@ public class ARMeshConfigurationPanel : MonoBehaviour
         _meshingSettings = FindObjectOfType<NianticLightshipMeshingExtensionSettings>();
 
         _frameRateValue = GameObject.Find("Frame Rate Value").GetComponent<InputField>();
-        _frameRateValue.text = _meshingSettings._frameRate.ToString();
+        _frameRateValue.text = _meshingSettings.TargetFrameRate.ToString();
 
         _integrationDistanceValue = GameObject.Find("Integration Distance Value").GetComponent<InputField>();
-        _integrationDistanceValue.text = _meshingSettings._maximumIntegrationDistance.ToString();
+        _integrationDistanceValue.text = _meshingSettings.MaximumIntegrationDistance.ToString();
 
         _voxelSize = GameObject.Find("Voxel Size Value").GetComponent<InputField>();
-        _voxelSize.text = _meshingSettings._voxelSize.ToString();
+        _voxelSize.text = _meshingSettings.VoxelSize.ToString();
 
         _enableDistanceBasedVolumetricCleanup = GameObject.Find("Distance Based Volumetric Cleanup Config").GetComponent<Toggle>();
-        _enableDistanceBasedVolumetricCleanup.isOn = _meshingSettings._enableDistanceBasedVolumetricCleanup;
+        _enableDistanceBasedVolumetricCleanup.isOn = _meshingSettings.EnableDistanceBasedVolumetricCleanup;
 
         _blockSize = GameObject.Find("Block Size Value").GetComponent<InputField>();
-        _blockSize.text = _meshingSettings._meshBlockSize.ToString();
+        _blockSize.text = _meshingSettings.MeshBlockSize.ToString();
 
         _cullingDistance = GameObject.Find("Culling Distance Value").GetComponent<InputField>();
-        _cullingDistance.text = _meshingSettings._meshCullingDistance.ToString();
+        _cullingDistance.text = _meshingSettings.MeshCullingDistance.ToString();
 
         _enableMeshDecimation = GameObject.Find("Mesh Decimation Config").GetComponent<Toggle>();
-        _enableMeshDecimation.isOn = _meshingSettings._enableMeshDecimation;
+        _enableMeshDecimation.isOn = _meshingSettings.EnableMeshDecimation;
     }
 
     public void Configure()
     {
-        _meshingSettings._frameRate = int.Parse(_frameRateValue.text);
-        _meshingSettings._maximumIntegrationDistance = float.Parse(_integrationDistanceValue.text);
-        _meshingSettings._voxelSize = float.Parse(_voxelSize.text);
-        _meshingSettings._enableDistanceBasedVolumetricCleanup = _enableDistanceBasedVolumetricCleanup.isOn;
-        _meshingSettings._meshBlockSize = float.Parse(_blockSize.text);
-        _meshingSettings._meshCullingDistance = float.Parse(_cullingDistance.text);
-        _meshingSettings._enableMeshDecimation = _enableMeshDecimation.isOn;
+        _meshingSettings.TargetFrameRate = int.Parse(_frameRateValue.text);
+        _meshingSettings.MaximumIntegrationDistance = float.Parse(_integrationDistanceValue.text);
+        _meshingSettings.VoxelSize = float.Parse(_voxelSize.text);
+        _meshingSettings.EnableDistanceBasedVolumetricCleanup = _enableDistanceBasedVolumetricCleanup.isOn;
+        _meshingSettings.MeshBlockSize = float.Parse(_blockSize.text);
+        _meshingSettings.MeshCullingDistance = float.Parse(_cullingDistance.text);
+        _meshingSettings.EnableMeshDecimation = _enableMeshDecimation.isOn;
         _meshingSettings.Configure();
     }
 }

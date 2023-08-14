@@ -65,6 +65,7 @@ public class VpsCoverageTargetListManager : MonoBehaviour
     private readonly List<VpsCoverageTargetListItem> _targetListItemInstances = new();
     private GameObject _scrollListContent;
 
+
     /// <summary>
     /// Setup listeners and callbacks to Change UI and set updated values coverage API Manager.
     /// </summary>

@@ -47,7 +47,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             // Calculate the display matrix
             displayMatrix = image != null
-                ? _CameraMath.CalculateDisplayMatrix(
+                ? CameraMath.CalculateDisplayMatrix(
                     image.width,
                     image.height,
                     viewportWidth,

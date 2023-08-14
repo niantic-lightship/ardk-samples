@@ -157,7 +157,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             // Determine the raw image rectSize preserving the texture aspect ratio, matching the screen orientation,
             // and keeping a minimum dimension size.
-            float minDimension = 360.0f;
+            float minDimension = 480.0f;
             float maxDimension = Mathf.Round(minDimension * aspect);
             Vector2 rectSize;
             switch (m_CurrentScreenOrientation)

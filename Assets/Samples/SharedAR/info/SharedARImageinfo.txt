@@ -1,0 +1,11 @@
+With this sample you can create a shared AR experience by tracking an image.
+
+<b>Instructions</b>:
+provide the target image (e.g. print, show on the screen). physical size of target image has to be same as specified in the SharedSpaceManager
+open the scene
+either start a new session or type PIN to join existing session
+- PIN code shows on top left of the screen -
+point the device to the target image.
+upon tracking successful, a cube will show up.
+after seeing the cube on the target image, there will be a circle target + name showing up on the other devices in the same session.
+when tracking drifted or lost, pointing the target image should fix colocalization.

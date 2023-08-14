@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.XR.ARSubsystems;
-using UnityEngine.XR.Management;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -19,17 +16,12 @@ public class SceneSwitcher : MonoBehaviour, ISerializationCallbackReceiver
 
     [SerializeField] private bool _stopSubsystems;
 
+    private HashSet<string> PortraitScenes = new HashSet<string>() {"Home","SharedARVPS","PersistentAR", "VPSLocalization" };
+
     public void SwitchToScene()
     {
-        if (_stopSubsystems)
-        {
-            StartCoroutine(SceneSwitchAfterStoppingSubsystems());
-        }
-        else
-        {
-            SceneManager.LoadScene(_targetSceneName, LoadSceneMode.Single);
-        }
-
+        OrientationPicker();
+        SceneManager.LoadScene(_targetSceneName, LoadSceneMode.Single);
     }
 
     public void OnBeforeSerialize()
@@ -45,25 +37,15 @@ public class SceneSwitcher : MonoBehaviour, ISerializationCallbackReceiver
     public void OnAfterDeserialize()
     {
     }
-
-    IEnumerator SceneSwitchAfterStoppingSubsystems()
+    private void OrientationPicker()
     {
-        if (XRGeneralSettings.Instance != null && XRGeneralSettings.Instance.Manager != null)
+        if (PortraitScenes.Contains(_targetSceneName))
         {
-            var loader = XRGeneralSettings.Instance.Manager.activeLoader;
-            if (loader != null)
-            {
-                var occlusionSubsystem = loader.GetLoadedSubsystem<XROcclusionSubsystem>();
-                if (occlusionSubsystem != null)
-                {
-                    occlusionSubsystem.Stop();
-                }
-            }
+            Screen.orientation = ScreenOrientation.Portrait;
         }
-
-        yield return null;
-
-        SceneManager.LoadScene(_targetSceneName, LoadSceneMode.Single);
-
+        else
+        {
+            Screen.orientation = ScreenOrientation.AutoRotation;
+        }
     }
 }
