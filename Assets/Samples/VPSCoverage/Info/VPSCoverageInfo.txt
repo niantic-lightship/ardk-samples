@@ -1,4 +1,0 @@
-The example will show you <b>VPS active</b> locations within the specified radius.
-
-To use this sample make sure to allow for location permissions, then just set a radius and tap <b>Request Areas</b>
-You may also use lat and long coordinates instead of current location.

@@ -27,14 +27,17 @@ EditorBuildSettings:
     path: Assets/Samples/Semantics/Scenes/SemanticsDisplay.unity
     guid: b43e677e36f234310adf6553404abbe5
   - enabled: 1
-    path: Assets/Samples/VPSCoverage/Scenes/VpsCoverageListExample.unity
-    guid: 6f69a0dede5c14986bb7d2591de029c8
-  - enabled: 1
     path: Assets/Samples/PersistentAR/Scenes/VPSLocalization.unity
     guid: 4d27e438dba0e4b118ee8e3a35ce3fa6
   - enabled: 1
     path: Assets/Samples/SharedAR/Scenes/SharedARVPS.unity
     guid: 5e2255d8c3c944f5b9830e69be55f728
+  - enabled: 1
+    path: Assets/Samples/SharedAR/Scenes/ImageTrackingColocalization.unity
+    guid: 41a110b1790a049f491907b95e423d6e
+  - enabled: 1
+    path: Assets/Samples/Scanning/Scenes/Recording.unity
+    guid: a8b815c6414994643b8e7a33e5b2ccf2
   m_configObjects:
     Niantic.Lightship.AR.LightshipSettings: {fileID: 11400000, guid: 05b0489c7d3114fe3b5a5321c06a66dd, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 0ba5772da672041b0b49b09b47e32b89, type: 2}

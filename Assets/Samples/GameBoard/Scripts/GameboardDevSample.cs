@@ -23,9 +23,20 @@ public class GameboardDevSample : MonoBehaviour
     [SerializeField]
     private GameObject _agentPrefab;
 
+    [SerializeField]
+    private GameObject _Visualization;
+
     private GameObject _creature;
     private GameboardAgent _agent;
 
+    private PlayerInput lightshipInput;
+    private InputAction primaryTouch;
+
+    private void Awake(){
+        //Get the input actions.
+        lightshipInput = GetComponent<PlayerInput>();
+        primaryTouch = lightshipInput.actions["Point"];
+    }
     void Update()
     {
         HandleTouch();
@@ -33,39 +44,25 @@ public class GameboardDevSample : MonoBehaviour
 
     public void ToggleVisualisation()
     {
-        //turn off the rendering for the gamebaard
-        _gameboardManager.GetComponent<GameboardRenderer>().enabled =
-            !_gameboardManager.GetComponent<GameboardRenderer>().enabled;
+        if(_creature == null ){
+            //turn off the rendering for the gamebaard
+            _gameboardManager.GetComponent<GameboardRenderer>().enabled =
+                !_gameboardManager.GetComponent<GameboardRenderer>().enabled;
 
-        //turn off the path rendering on any agent
-        _agent.GetComponent<GameboardAgentPathRenderer>().enabled =
-            !_agent.GetComponent<GameboardAgentPathRenderer>().enabled;
+            //turn off the path rendering on any agent
+            _agent.GetComponent<GameboardAgentPathRenderer>().enabled =
+                !_agent.GetComponent<GameboardAgentPathRenderer>().enabled;
+        }
     }
 
     private void HandleTouch()
     {
-        //in the editor we want to use mouse clicks on phones we want touches.
-        #if UNITY_EDITOR
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
-        #else
-        //if there is a touch call our function
-        if (Input.touchCount <= 0)
+        //Get the primaryTouch from our input actions.
+        if (!primaryTouch.WasPerformedThisFrame())
             return;
-
-        var touch = Input.GetTouch(0);
-
-        //if there is no touch or touch selects UI element
-        if (Input.touchCount <= 0 )
-            return;
-        if (touch.phase == UnityEngine.TouchPhase.Began)
-        #endif
-        {
-            #if UNITY_EDITOR
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            #else
-            Ray ray = _camera.ScreenPointToRay(touch.position);
-            #endif
+        else{
             //project the touch point from screen space into 3d and pass that to your agent as a destination
+            Ray ray = _camera.ScreenPointToRay(primaryTouch.ReadValue<Vector2>());
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
@@ -77,6 +74,8 @@ public class GameboardDevSample : MonoBehaviour
                     _creature = Instantiate(_agentPrefab);
                     _creature.transform.position = hit.point;
                     _agent = _creature.GetComponent<GameboardAgent>();
+                    _Visualization.SetActive(true);
+
                 }
                 else
                 {

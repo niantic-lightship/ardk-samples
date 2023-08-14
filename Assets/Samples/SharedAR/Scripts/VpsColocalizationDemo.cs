@@ -17,7 +17,7 @@ namespace  Niantic.Lightship.AR.Samples
         private VpsCoverageTargetListManager _vpsCoverageTargetListManager;
 
         [SerializeField]
-        private SharedSpaceManager _sharedSpaceManagerManager;
+        private SharedSpaceManager _sharedSpaceManager;
 
         [SerializeField]
         private GameObject _netButtonsPanel;
@@ -37,6 +37,7 @@ namespace  Niantic.Lightship.AR.Samples
         [SerializeField]
         private GameObject _localizationStatusPanel;
 
+        [InspectorName("In-Editor Payloads")]
         [SerializeField]
         private string _inEditorPayload;
 
@@ -50,7 +51,7 @@ namespace  Niantic.Lightship.AR.Samples
         // Start is called before the first frame update
         void Start()
         {
-            _sharedSpaceManagerManager.sharedSpaceManagerStateChanged += OnColocalizationTrackingStateChanged;
+            _sharedSpaceManager.sharedSpaceManagerStateChanged += OnColocalizationTrackingStateChanged;
             _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed += OnLocationSelected;
             NetworkManager.Singleton.OnServerStarted += OnServerStarted;
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
@@ -60,13 +61,13 @@ namespace  Niantic.Lightship.AR.Samples
             _netButtonsPanel.SetActive(false);
             _statsPanel.Hide();
             _localizationStatusPanel.SetActive(false);
-            if (_sharedSpaceManagerManager.GetColocalizationType() ==
-                SharedSpaceManager.ColocalizationType.SkipColocalization)
+            if (_sharedSpaceManager.GetColocalizationType() ==
+                SharedSpaceManager.ColocalizationType.MockColocalization)
             {
                 // Hide coverage list panel and show connction button
                 _vpsCoverageTargetListManager.gameObject.SetActive(false);
                 // Set room to connect
-                _sharedSpaceManagerManager.PrepareRoom(
+                _sharedSpaceManager.PrepareRoom(
                     _roomNamePrefix + "SkippingVpsRoom",
                     32,
                     "vps colocalization demo"
@@ -82,7 +83,7 @@ namespace  Niantic.Lightship.AR.Samples
 
         private void OnDestroy()
         {
-            _sharedSpaceManagerManager.sharedSpaceManagerStateChanged -= OnColocalizationTrackingStateChanged;
+            _sharedSpaceManager.sharedSpaceManagerStateChanged -= OnColocalizationTrackingStateChanged;
             _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed -= OnLocationSelected;
             if (NetworkManager.Singleton != null)
             {
@@ -104,8 +105,8 @@ namespace  Niantic.Lightship.AR.Samples
             }
 
             // Start tracking and set Room to join based on anchor payload
-            _sharedSpaceManagerManager.StartTracking(defaultPayloadToSet);
-            _sharedSpaceManagerManager.PrepareRoom(
+            _sharedSpaceManager.StartTracking(defaultPayloadToSet);
+            _sharedSpaceManager.PrepareRoom(
                 _roomNamePrefix+defaultPayloadToSet,
                 32,
                 "vps colocalization demo"

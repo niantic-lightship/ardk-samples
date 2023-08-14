@@ -12,12 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abc3dbfe57c4ad49b19309f187d9e1a, type: 3}
   m_Name: Lightship Settings
   m_EditorClassIdentifier: 
-  _usePlaybackOnEditor: 0
-  _usePlaybackOnDevice: 0
-  _playbackDatasetPathEditor: 
-  _playbackDatasetPathDevice: 
-  _runPlaybackManuallyEditor: 0
-  _runPlaybackManuallyDevice: 0
   _apiKey: 
   _useLightshipDepth: 1
   _useLightshipMeshing: 1
@@ -27,3 +21,15 @@ MonoBehaviour:
   _useLightshipSemanticSegmentation: 1
   _LightshipSemanticSegmentationFrameRate: 10
   _useLightshipScanning: 1
+  _editorPlaybackSettings:
+    _usePlayback: 0
+    _playbackDatasetPath: 
+    _runPlaybackManually: 0
+    _loopInfinitely: 0
+    _numberOfIterations: 1
+  _devicePlaybackSettings:
+    _usePlayback: 0
+    _playbackDatasetPath: 
+    _runPlaybackManually: 0
+    _loopInfinitely: 0
+    _numberOfIterations: 1
