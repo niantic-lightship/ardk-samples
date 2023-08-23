@@ -3,7 +3,7 @@
     "com.nianticlabs.lightship": {
       "version": "https://github.com/niantic-lightship/ardk-upm.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.editorcoroutines": "1.0.0",
         "com.unity.xr.arfoundation": "5.0.7",
@@ -17,7 +17,7 @@
     "com.nianticlabs.lightship.sharedar": {
       "version": "https://github.com/niantic-lightship/sharedar-upm.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.nianticlabs.lightship": "3.0.0-beta-3",
         "com.unity.netcode.gameobjects": "1.2.0"
