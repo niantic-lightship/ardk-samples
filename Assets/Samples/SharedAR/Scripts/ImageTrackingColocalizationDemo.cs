@@ -14,13 +14,16 @@ namespace Niantic.Lightship.AR.Samples
         public static ImageTrackingColocalizationDemo Instance { get; private set; }
 
         [SerializeField]
-        private SharedSpaceManager _sharedSpaceManagerManager;
+        private SharedSpaceManager _sharedSpaceManager;
 
         [SerializeField]
         private GameObject _netButtonsPanel;
 
         [SerializeField]
         private GameObject _endPanel;
+
+        [SerializeField]
+        private GameObject _targetImageInstructionPanel;
 
         [SerializeField]
         private Text _endPanelText;
@@ -34,7 +37,15 @@ namespace Niantic.Lightship.AR.Samples
         [SerializeField]
         private Text _roomNameDisplayText;
 
+        [SerializeField]
+        private Texture2D _targetImage;
+
+        [SerializeField]
+        private float _targetImageSize;
+
         private string _roomName;
+
+        private bool _startAsHost;
 
         void Awake()
         {
@@ -43,7 +54,7 @@ namespace Niantic.Lightship.AR.Samples
 
         void Start()
         {
-            _sharedSpaceManagerManager.sharedSpaceManagerStateChanged += OnColocalizationTrackingStateChanged;
+            _sharedSpaceManager.sharedSpaceManagerStateChanged += OnColocalizationTrackingStateChanged;
             NetworkManager.Singleton.OnServerStarted += OnServerStarted;
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnectedCallback;
@@ -51,12 +62,13 @@ namespace Niantic.Lightship.AR.Samples
             Debug.Log("Starting Image Tracking Colocalization");
             _netButtonsPanel.SetActive(true);
             _roomNameDisplayText.gameObject.SetActive(false);
+            _targetImageInstructionPanel.SetActive(false);
 
         }
 
         private void OnDestroy()
         {
-            _sharedSpaceManagerManager.sharedSpaceManagerStateChanged -= OnColocalizationTrackingStateChanged;
+            _sharedSpaceManager.sharedSpaceManagerStateChanged -= OnColocalizationTrackingStateChanged;
             if (NetworkManager.Singleton != null)
             {
                 NetworkManager.Singleton.OnServerStarted -= OnServerStarted;
@@ -73,9 +85,22 @@ namespace Niantic.Lightship.AR.Samples
             if (args.Tracking)
             {
                 Debug.Log("Colocalized.");
+                // Hide the target image instruction panel
+                _targetImageInstructionPanel.SetActive(false);
+
                 // create an origin marker object and set under the sharedAR origin
                 Instantiate(_sharedRootMarkerPrefab,
-                    _sharedSpaceManagerManager._sharedArOriginObject.transform, false);
+                    _sharedSpaceManager._sharedArOriginObject.transform, false);
+
+                // Start networking
+                if (_startAsHost)
+                {
+                    NetworkManager.Singleton.StartHost();
+                }
+                else
+                {
+                    NetworkManager.Singleton.StartClient();
+                }
             }
             else
             {
@@ -85,41 +110,47 @@ namespace Niantic.Lightship.AR.Samples
 
         public void StartNewRoom()
         {
-            // start tracking. pass empty string for image tracking colocalization.
-            _sharedSpaceManagerManager.StartTracking("");
+            var imageTrackingOptions = ISharedSpaceTrackingOptions.CreateImageTrackingOptions(
+                _targetImage, _targetImageSize);
 
-            // generate a new room name. 3 digit number.
+            // generate a new room name 3 digit number
             int code = (int)Random.Range(0.0f, 999.0f);
-            _roomName =  code.ToString("D3");
-            SetupRoomAndUI();
+            _roomName = code.ToString("D3");
+            var roomOptions = SetupRoomAndUI();
+
+            _sharedSpaceManager.StartSharedSpace(imageTrackingOptions, roomOptions);
 
             // start as host
-            NetworkManager.Singleton.StartHost();
+            _startAsHost = true;
         }
 
         public void Join()
         {
-            // start tracking. pass empty string for image tracking colocalization.
-            _sharedSpaceManagerManager.StartTracking("");
+            var imageTrackingOptions = ISharedSpaceTrackingOptions.CreateImageTrackingOptions(
+                _targetImage, _targetImageSize);
 
-            // set room name from text box
+            //set room name from text box
             _roomName = _roomNameInputField.text;
-            SetupRoomAndUI();
+            var roomOptions = SetupRoomAndUI();
+
+            _sharedSpaceManager.StartSharedSpace(imageTrackingOptions, roomOptions);
 
             // start as client
-            NetworkManager.Singleton.StartClient();
+            _startAsHost = false;
         }
 
-        private void SetupRoomAndUI()
+        private ISharedSpaceRoomOptions SetupRoomAndUI()
         {
-            _sharedSpaceManagerManager.PrepareRoom(
-                _roomName,
-                32,
-                ""
-            );
+            // Update UI
             _roomNameDisplayText.text = $"PIN: {_roomName}";
             _netButtonsPanel.SetActive(false);
             _roomNameDisplayText.gameObject.SetActive(true);
+            _targetImageInstructionPanel.SetActive(true);
+
+            //Create a room options and return it
+
+            return ISharedSpaceRoomOptions.CreateLightshipRoomOptions(
+                _roomName, 32, "image tracking colocalization demo");
         }
 
         private void OnServerStarted()

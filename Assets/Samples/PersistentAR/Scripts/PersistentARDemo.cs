@@ -42,7 +42,8 @@ namespace Niantic.Lightship.AR.Samples
                 {
                     arLocationSelection.ARLocationSelected -= HandleLocationSelected;
                     _arLocationSelector.SetActive(false);
-                    _arLocationManager.StartTracking(arLocation);
+                    _arLocationManager.SetARLocations(arLocation);
+                    _arLocationManager.StartTracking();
                 }
             }
         }

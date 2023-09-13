@@ -75,7 +75,9 @@ Shader "Unlit/DepthFit"
 
             fragment_output frag (v2f i)
             {
+#if !STEREO_MULTIVIEW_ON                
                 UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
+#endif                
 
                 // Sample the environment depth (in meters).
                 float depth = tex2D(_MainTex, i.texcoord).r;

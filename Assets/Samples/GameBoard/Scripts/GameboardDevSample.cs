@@ -44,7 +44,7 @@ public class GameboardDevSample : MonoBehaviour
 
     public void ToggleVisualisation()
     {
-        if(_creature == null ){
+        if(_creature != null ){
             //turn off the rendering for the gamebaard
             _gameboardManager.GetComponent<GameboardRenderer>().enabled =
                 !_gameboardManager.GetComponent<GameboardRenderer>().enabled;
@@ -64,12 +64,15 @@ public class GameboardDevSample : MonoBehaviour
             //project the touch point from screen space into 3d and pass that to your agent as a destination
             Ray ray = _camera.ScreenPointToRay(primaryTouch.ReadValue<Vector2>());
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) &&
+                _gameboardManager.gameboard.IsOnGameboard(hit.point, 0.2f))
             {
                 if (_creature == null )
                 {
                     //TODO: Add the is there enough space to place.
                     //have a nice fits/dont fit in the space.
+
+
 
                     _creature = Instantiate(_agentPrefab);
                     _creature.transform.position = hit.point;

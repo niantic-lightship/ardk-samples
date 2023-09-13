@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Niantic.Lightship.AR.ARFoundation;
+using Niantic.Lightship.AR.ARFoundation.Meshing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class ARMeshConfigurationPanel : MonoBehaviour
 
     [SerializeField] private GameObject _settingsPanel;
 
-    private NianticLightshipMeshingExtensionSettings _meshingSettings;
+    private LightshipMeshingExtension _lightshipMeshingExtension;
     private InputField _frameRateValue;
     private InputField _integrationDistanceValue;
     private InputField _voxelSize;
@@ -27,39 +28,39 @@ public class ARMeshConfigurationPanel : MonoBehaviour
 
     public void Start()
     {
-        _meshingSettings = FindObjectOfType<NianticLightshipMeshingExtensionSettings>();
+        _lightshipMeshingExtension = FindObjectOfType<LightshipMeshingExtension>();
 
         _frameRateValue = GameObject.Find("Frame Rate Value").GetComponent<InputField>();
-        _frameRateValue.text = _meshingSettings.TargetFrameRate.ToString();
+        _frameRateValue.text = _lightshipMeshingExtension.TargetFrameRate.ToString();
 
         _integrationDistanceValue = GameObject.Find("Integration Distance Value").GetComponent<InputField>();
-        _integrationDistanceValue.text = _meshingSettings.MaximumIntegrationDistance.ToString();
+        _integrationDistanceValue.text = _lightshipMeshingExtension.MaximumIntegrationDistance.ToString();
 
         _voxelSize = GameObject.Find("Voxel Size Value").GetComponent<InputField>();
-        _voxelSize.text = _meshingSettings.VoxelSize.ToString();
+        _voxelSize.text = _lightshipMeshingExtension.VoxelSize.ToString();
 
         _enableDistanceBasedVolumetricCleanup = GameObject.Find("Distance Based Volumetric Cleanup Config").GetComponent<Toggle>();
-        _enableDistanceBasedVolumetricCleanup.isOn = _meshingSettings.EnableDistanceBasedVolumetricCleanup;
+        _enableDistanceBasedVolumetricCleanup.isOn = _lightshipMeshingExtension.EnableDistanceBasedVolumetricCleanup;
 
         _blockSize = GameObject.Find("Block Size Value").GetComponent<InputField>();
-        _blockSize.text = _meshingSettings.MeshBlockSize.ToString();
+        _blockSize.text = _lightshipMeshingExtension.MeshBlockSize.ToString();
 
         _cullingDistance = GameObject.Find("Culling Distance Value").GetComponent<InputField>();
-        _cullingDistance.text = _meshingSettings.MeshCullingDistance.ToString();
+        _cullingDistance.text = _lightshipMeshingExtension.MeshCullingDistance.ToString();
 
         _enableMeshDecimation = GameObject.Find("Mesh Decimation Config").GetComponent<Toggle>();
-        _enableMeshDecimation.isOn = _meshingSettings.EnableMeshDecimation;
+        _enableMeshDecimation.isOn = _lightshipMeshingExtension.EnableMeshDecimation;
     }
 
     public void Configure()
     {
-        _meshingSettings.TargetFrameRate = int.Parse(_frameRateValue.text);
-        _meshingSettings.MaximumIntegrationDistance = float.Parse(_integrationDistanceValue.text);
-        _meshingSettings.VoxelSize = float.Parse(_voxelSize.text);
-        _meshingSettings.EnableDistanceBasedVolumetricCleanup = _enableDistanceBasedVolumetricCleanup.isOn;
-        _meshingSettings.MeshBlockSize = float.Parse(_blockSize.text);
-        _meshingSettings.MeshCullingDistance = float.Parse(_cullingDistance.text);
-        _meshingSettings.EnableMeshDecimation = _enableMeshDecimation.isOn;
-        _meshingSettings.Configure();
+        _lightshipMeshingExtension.TargetFrameRate = int.Parse(_frameRateValue.text);
+        _lightshipMeshingExtension.MaximumIntegrationDistance = float.Parse(_integrationDistanceValue.text);
+        _lightshipMeshingExtension.VoxelSize = float.Parse(_voxelSize.text);
+        _lightshipMeshingExtension.EnableDistanceBasedVolumetricCleanup = _enableDistanceBasedVolumetricCleanup.isOn;
+        _lightshipMeshingExtension.MeshBlockSize = float.Parse(_blockSize.text);
+        _lightshipMeshingExtension.MeshCullingDistance = float.Parse(_cullingDistance.text);
+        _lightshipMeshingExtension.EnableMeshDecimation = _enableMeshDecimation.isOn;
+        _lightshipMeshingExtension.Configure();
     }
 }

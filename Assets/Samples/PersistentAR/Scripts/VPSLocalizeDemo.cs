@@ -64,7 +64,8 @@ public class VPSLocalizeDemo : MonoBehaviour
 
         //Once it is setup, we assign the payload and start tracking the ARLocation.
         _arLocation.Payload = new ARPersistentAnchorPayload(defaultPayloadToSet);
-        _arLocationManager.StartTracking(_arLocation);
+        _arLocationManager.SetARLocations(_arLocation);
+        _arLocationManager.StartTracking();
 
         _vpsCoverageTargetListManager.gameObject.SetActive(false);
         Debug.Log("Location selected, ARLocation NOT TRACKING");

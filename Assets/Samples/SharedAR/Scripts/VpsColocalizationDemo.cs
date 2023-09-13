@@ -67,11 +67,9 @@ namespace  Niantic.Lightship.AR.Samples
                 // Hide coverage list panel and show connction button
                 _vpsCoverageTargetListManager.gameObject.SetActive(false);
                 // Set room to connect
-                _sharedSpaceManager.PrepareRoom(
-                    _roomNamePrefix + "SkippingVpsRoom",
-                    32,
-                    "vps colocalization demo"
-                );
+                var vpsTrackingOptions = ISharedSpaceTrackingOptions.CreateMockTrackingOptions();
+                var roomOptions = ISharedSpaceRoomOptions.CreateLightshipRoomOptions(
+                    _roomNamePrefix + "SkippingVpsRoom",32, "vps colocalization demo");
             }
             else if (Application.isEditor && !string.IsNullOrEmpty(_inEditorPayload))
             {
@@ -105,13 +103,10 @@ namespace  Niantic.Lightship.AR.Samples
             }
 
             // Start tracking and set Room to join based on anchor payload
-            _sharedSpaceManager.StartTracking(defaultPayloadToSet);
-            _sharedSpaceManager.PrepareRoom(
-                _roomNamePrefix+defaultPayloadToSet,
-                32,
-                "vps colocalization demo"
-            );
-
+            var vpsTrackingOptions = ISharedSpaceTrackingOptions.CreateVpsTrackingOptions(defaultPayloadToSet);
+            var roomOptions= ISharedSpaceRoomOptions.CreateVpsRoomOptions(
+                vpsTrackingOptions, _roomNamePrefix, 32, "vps colocaization demo");
+            _sharedSpaceManager.StartSharedSpace(vpsTrackingOptions, roomOptions);
             _vpsCoverageTargetListManager.gameObject.SetActive(false);
             _localizationStatusPanel.SetActive(true);
             _localizationStatusText.text = "NOT TRACKING";

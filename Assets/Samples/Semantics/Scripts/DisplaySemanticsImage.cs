@@ -34,13 +34,13 @@ namespace Niantic.Lightship.AR.Samples
         protected override void OnEnable()
         {
             base.OnEnable();
-            _semanticsManager.SemanticModelIsReady += SemanticsManager_OnSemanticModelIsReady;
+            _semanticsManager.DataInitialized += SemanticsManager_OnDataInitialized;
             _channelDropdown.onValueChanged.AddListener(ChannelDropdown_OnValueChanged);
         }
 
         private void OnDisable()
         {
-            _semanticsManager.SemanticModelIsReady -= SemanticsManager_OnSemanticModelIsReady;
+            _semanticsManager.DataInitialized -= SemanticsManager_OnDataInitialized;
             _channelDropdown.onValueChanged.RemoveListener(ChannelDropdown_OnValueChanged);
         }
 
@@ -80,11 +80,11 @@ namespace Niantic.Lightship.AR.Samples
         /// <summary>
         /// Invoked when the semantic segmentation model is downloaded and ready for use.
         /// </summary>
-        private void SemanticsManager_OnSemanticModelIsReady(ARSemanticModelReadyEventArgs args)
+        private void SemanticsManager_OnDataInitialized(ARSemanticSegmentationModelEventArgs args)
         {
             // Initialize the channel names in the dropdown menu.
-            var channelNames = _semanticsManager.SemanticChannelNames;
-            _channelDropdown.AddOptions(channelNames);
+            var channelNames = _semanticsManager.ChannelNames;
+            _channelDropdown.AddOptions(channelNames.ToList());
 
             // Display artificial ground by default.
             _semanticChannelName = channelNames[3];
