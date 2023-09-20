@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Samples/Depth/Scenes/DepthOcclusion.unity
     guid: 0d0f8927903d84af3b21ddede8358fcc
   - enabled: 1
+    path: Assets/Samples/Depth/Scenes/DepthSemanticSuppression.unity
+    guid: b1390d12f061d47ad9e79f98897d7470
+  - enabled: 1
     path: Assets/Samples/Depth/Scenes/DepthDisplay.unity
     guid: a7c2694f3359d46a8acf408d66801c84
   - enabled: 1
