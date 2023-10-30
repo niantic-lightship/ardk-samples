@@ -1,29 +1,20 @@
+// Copyright 2023 Niantic, Inc. All Rights Reserved.
 using System.Text;
-using Niantic.Lightship.AR.Utilities;
+using UnityEngine.XR.ARFoundation;
 using UnityEngine.UI;
+using UnityEngine;
 
-namespace UnityEngine.XR.ARFoundation.Samples
+namespace Niantic.Lightship.AR.Samples
 {
     public abstract class DisplayImage : MonoBehaviour
     {
-        /// <summary>
-        /// Name of the display rotation matrix in the shader.
-        /// </summary>
+        // Name of the display rotation matrix in the shader.
         const string k_DisplayMatrixName = "_DisplayMatrix";
 
-        /// <summary>
-        /// ID of the display matrix in the shader.
-        /// </summary>
         private readonly int k_DisplayMatrix = Shader.PropertyToID(k_DisplayMatrixName);
 
-        /// <summary>
-        /// A string builder for construction of strings.
-        /// </summary>
         protected readonly StringBuilder m_StringBuilder = new();
 
-        /// <summary>
-        /// The current screen orientation remembered so that we are only updating the raw image layout when it changes.
-        /// </summary>
         protected ScreenOrientation m_CurrentScreenOrientation;
 
         [SerializeField]
@@ -31,15 +22,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
         ARCameraManager m_CameraManager;
 
         [SerializeField]
+        [Tooltip("Raw Image UI element for display.")]
         protected RawImage m_RawImage;
 
         [SerializeField]
+        [Tooltip("Material using the shader.")]
         Material m_Material;
 
         [SerializeField]
+        [Tooltip("UI Text field for image info")]
         Text m_ImageInfo;
 
-        // The rendering Unity camera
         private Camera m_camera;
 
         protected virtual void Awake()
@@ -106,12 +99,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         protected abstract void OnUpdatePresentation( int viewportWidth, int viewportHeight, ScreenOrientation orientation,
             Material renderingMaterial, out Texture image, out Matrix4x4 displayMatrix);
 
-        /// <summary>
-        /// Create log information about the given texture.
-        /// </summary>
-        /// <param name="stringBuilder">The string builder to which to append the texture information.</param>
-        /// <param name="textureName">The semantic name of the texture for logging purposes.</param>
-        /// <param name="texture">The texture for which to log information.</param>
+
         private static void BuildTextureInfo(StringBuilder stringBuilder, string textureName, Texture2D texture)
         {
             stringBuilder.AppendLine($"texture : {textureName}");
@@ -128,10 +116,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        /// <summary>
-        /// Log the given text to the screen if the image info UI is set. Otherwise, log the string to debug.
-        /// </summary>
-        /// <param name="text">The text string to log.</param>
         private void LogText(string text)
         {
             if (m_ImageInfo != null)
@@ -144,9 +128,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        /// <summary>
-        /// Update the raw image with the current configurations.
-        /// </summary>
         private void UpdateRawImage()
         {
             Debug.Assert(m_RawImage != null, "no raw image");

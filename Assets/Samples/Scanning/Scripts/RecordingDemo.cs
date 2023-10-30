@@ -1,13 +1,15 @@
+// Copyright 2023 Niantic, Inc. All Rights Reserved.
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Niantic.ARDK.AR.Scanning;
-using Niantic.Lightship.AR.ARFoundation.Scanning;
+using Niantic.Lightship.AR.Scanning;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
+#if UNITY_ANDROID && !UNITY_EDITOR
 using UnityEngine.Android;
+#endif
 
 namespace Niantic.Lightship.AR.Samples
 {
@@ -16,27 +18,30 @@ namespace Niantic.Lightship.AR.Samples
         [Tooltip("The manager used to perform the scanning")]
         [SerializeField]
         private ARScanningManager _arScanningManager;
+        
+        [Tooltip("The manager used to render the device camera feed")]
+        [SerializeField]
+        private ARCameraManager _arCameraManager;
 
         [Tooltip("Scan Panel")]
         [SerializeField]
-        private GameObject _scanPanel;
-
-        [Tooltip("Export Panel")]
-        [SerializeField]
-        private ExportScanPanel _exportScanPanel;
-
-        [Tooltip("Button to start scanning")]
-        [SerializeField]
-        private Button _startScanningButton;
-
-        [Tooltip("Button to stop scanning")]
-        [SerializeField]
-        private Button _stopScanningButton;
+        private GameObject _performScanPanel;
 
         [Tooltip("Button to export a scan")]
         [SerializeField]
-        private Button _startExportButton;
+        private GameObject _saveScanPanel;
 
+        [Tooltip("Export Panel")]
+        [SerializeField]
+        private GameObject _exportScanPanel;
+
+        [Tooltip("Export Panel title text to show export status")]
+        [SerializeField]
+        private Text _exportScanPanelTitleText;
+
+        [Tooltip("Export Panel body text to show dataset path")]
+        [SerializeField]
+        private Text _exportScanPanelBodyText;
 
         private ScanStore _scanStore;
         private ScanStore.SavedScan _savedScan;
@@ -44,10 +49,21 @@ namespace Niantic.Lightship.AR.Samples
         void Start()
         {
             _scanStore = _arScanningManager.GetScanStore();
-            InitializeLocation();
+            _arCameraManager.frameReceived += OnCameraFrameReceived;
         }
 
-        private async void InitializeLocation()
+        private void OnCameraFrameReceived(ARCameraFrameEventArgs args)
+        {
+            if (args.textures.Count <= 0) 
+                return;
+            _arCameraManager.frameReceived -= OnCameraFrameReceived;
+            InitializeLocation(() =>
+            {
+                _performScanPanel.SetActive(true);
+            });
+        }
+
+        private async void InitializeLocation(Action OnInitializeLocationComplete)
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
             if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
@@ -57,7 +73,7 @@ namespace Niantic.Lightship.AR.Samples
                 {
                     if (permissionName == "android.permission.ACCESS_FINE_LOCATION")
                     {
-                        InitializeLocation();
+                        InitializeLocation(OnInitializeLocationComplete);
                     }
                 };
 
@@ -66,42 +82,49 @@ namespace Niantic.Lightship.AR.Samples
             }
 #endif
             Input.compass.enabled = true;
-            if (Input.location.status == LocationServiceStatus.Stopped)
+            if (Input.location.status != LocationServiceStatus.Stopped)
             {
-                Input.location.Start();
-                while (Input.location.status != LocationServiceStatus.Running)
-                {
-                    await Task.Delay(100); // ms
-                }
+                return;
             }
+
+            Input.location.Start();
+            while (Input.location.status != LocationServiceStatus.Running)
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
+            }
+
+            OnInitializeLocationComplete?.Invoke();
         }
 
         public void StartScanning()
         {
-            _stopScanningButton.gameObject.SetActive(true);
-            _startExportButton.gameObject.SetActive(false);
-            _startScanningButton.gameObject.SetActive(false);
+            _saveScanPanel.SetActive(false);
             _arScanningManager.enabled = true;
         }
 
         public async void StopScanning()
         {
-            _stopScanningButton.gameObject.SetActive(false);
              await _arScanningManager.SaveScan();
             _arScanningManager.enabled = false;
-            _startExportButton.gameObject.SetActive(true);
+            _saveScanPanel.SetActive(true);
             string scanID = _arScanningManager.GetCurrentScanId();
             _savedScan = _scanStore.GetSavedScans().First(s => s.ScanId == scanID);
+        }
 
+        public void DiscardScan()
+        {
+            _scanStore.DeleteScan(_savedScan);
+            _saveScanPanel.SetActive(false);
         }
 
         public async void StartExporting()
         {
-            _scanPanel.SetActive(false);
-            _exportScanPanel.gameObject.SetActive(true);
+            _performScanPanel.SetActive(false);
+            _saveScanPanel.SetActive(false);
+            _exportScanPanel.SetActive(true);
             using var exportPayloadBuilder = new ScanArchiveBuilder(_savedScan, new UploadUserInfo());
-            _exportScanPanel.SetExportStatusText(true, "");
-            string message = "";
+            _exportScanPanelTitleText.text = "Exporting...";
+            string message = string.Empty;
             while (exportPayloadBuilder.HasMoreChunks())
             {
                 var exportTask = exportPayloadBuilder.CreateTaskToGetNextChunk();
@@ -109,9 +132,9 @@ namespace Niantic.Lightship.AR.Samples
                 string chunk = await exportTask;
                 message += chunk;
                 message += "\n";
-                _exportScanPanel.SetExportStatusText(true, message);
+                _exportScanPanelBodyText.text = message;
             }
-            _exportScanPanel.SetExportStatusText(false, message);
+            _exportScanPanelTitleText.text = !string.IsNullOrEmpty(message) ? "Exporting Completed" : "Exporting Failed";
         }
     }
 }

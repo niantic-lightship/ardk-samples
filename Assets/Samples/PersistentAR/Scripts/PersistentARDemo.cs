@@ -1,6 +1,6 @@
-using System;
-using Niantic.ARDK.AR.Protobuf;
-using Niantic.Lightship.AR.Subsystems;
+// Copyright 2023 Niantic, Inc. All Rights Reserved.
+using Niantic.Lightship.AR.LocationAR;
+using Niantic.Lightship.AR.PersistentAnchors;
 using UnityEngine;
 
 namespace Niantic.Lightship.AR.Samples
@@ -18,6 +18,8 @@ namespace Niantic.Lightship.AR.Samples
 
         private void Start()
         {
+            _arLocationManager.locationTrackingStateChanged += OnLocationTrackingStateChanged;
+            
             if (_arLocationManager.AutoTrack)
             {
                 HideARLocationMenu();
@@ -51,6 +53,16 @@ namespace Niantic.Lightship.AR.Samples
         private void HideARLocationMenu()
         {
             _arLocationSelector.SetActive(false);
+        }
+
+        private void OnLocationTrackingStateChanged(ARLocationTrackedEventArgs args)
+        {
+             if (!args.Tracking)
+             {
+                // We de-activate the gameObject when we lose tracking.
+                // ARLocationManager will not de-activate it automatically
+                args.ARLocation.gameObject.SetActive(false);
+             }
         }
     }
 }

@@ -90,7 +90,7 @@ namespace Niantic.Lightship.AR.Samples
 
                 // create an origin marker object and set under the sharedAR origin
                 Instantiate(_sharedRootMarkerPrefab,
-                    _sharedSpaceManager._sharedArOriginObject.transform, false);
+                    _sharedSpaceManager.SharedArOriginObject.transform, false);
 
                 // Start networking
                 if (_startAsHost)

@@ -1,7 +1,7 @@
-With this sample you can use this scene to record a AR session for use in playback.
+With this sample you can use this scene to record an AR session to be used as a playback dataset.
 
 <b>Instructions</b>:
-When ready to record the playback dataset, click “Start”
-Record the environment with your phone. Keep the phone in portrait mode.
-Click “Stop” to finish recording.
-Click “Export” and wait for a path to the archive to be presented on the screen. This creates the playback dataset.
+Press the recording button to start capturing the ar camera feed.
+While recording, keep the phone in portrait mode.
+Press the recording button again to stop capturing the ar camera feed.
+When prompted, press “Save” to save the recording as a playback dataset on your device.

@@ -1,15 +1,13 @@
+// Copyright 2023 Niantic, Inc. All Rights Reserved.
 using System.Linq;
-using Niantic.Lightship.AR.ARFoundation;
+using Niantic.Lightship.AR.Semantics;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR.ARFoundation.Samples;
 using UnityEngine.XR.ARSubsystems;
 
 namespace Niantic.Lightship.AR.Samples
 {
-    /// <summary>
-    /// This component displays an overlay of semantic classification data.
-    /// </summary>
+
     public sealed class DisplaySemanticsImage : DisplayImage
     {
         [SerializeField]
@@ -19,11 +17,7 @@ namespace Niantic.Lightship.AR.Samples
         [SerializeField]
         private Dropdown _channelDropdown;
 
-        // The name of the actively selected semantic channel
         private string _semanticChannelName = string.Empty;
-
-        // The texture to fill with confidence values of the selected channel
-        private Texture _texture;
 
         protected override void Awake()
         {
@@ -34,33 +28,16 @@ namespace Niantic.Lightship.AR.Samples
         protected override void OnEnable()
         {
             base.OnEnable();
-            _semanticsManager.DataInitialized += SemanticsManager_OnDataInitialized;
+            _semanticsManager.MetadataInitialized += SemanticsManager_OnDataInitialized;
             _channelDropdown.onValueChanged.AddListener(ChannelDropdown_OnValueChanged);
         }
 
         private void OnDisable()
         {
-            _semanticsManager.DataInitialized -= SemanticsManager_OnDataInitialized;
+            _semanticsManager.MetadataInitialized -= SemanticsManager_OnDataInitialized;
             _channelDropdown.onValueChanged.RemoveListener(ChannelDropdown_OnValueChanged);
         }
 
-        private void OnDestroy()
-        {
-            if (_texture != null)
-            {
-                Destroy(_texture);
-            }
-        }
-
-        /// <summary>
-        /// Invoked when it is time to update the presentation.
-        /// </summary>
-        /// <param name="viewportWidth">The width of the portion of the screen the image will be rendered onto.</param>
-        /// <param name="viewportHeight">The height of the portion of the screen the image will be rendered onto.</param>
-        /// <param name="orientation">The orientation of the screen.</param>
-        /// <param name="renderingMaterial">The material used to render the image.</param>
-        /// <param name="image">The image to render.</param>
-        /// <param name="displayMatrix">A transformation matrix to fit the image onto the viewport.</param>
         protected override void OnUpdatePresentation(int viewportWidth, int viewportHeight,ScreenOrientation orientation,
             Material renderingMaterial, out Texture image, out Matrix4x4 displayMatrix)
         {
@@ -71,15 +48,10 @@ namespace Niantic.Lightship.AR.Samples
             };
 
             // Update the texture with the confidence values of the currently selected channel
-            _semanticsManager.GetSemanticChannelTexture(_semanticChannelName, viewport, ref _texture, out displayMatrix);
-
-            // Forward the image to display
-            image = _texture;
+            image = _semanticsManager.GetSemanticChannelTexture(_semanticChannelName, out displayMatrix, viewport);
+            renderingMaterial.SetTexture("_SemanticTex", image);
         }
 
-        /// <summary>
-        /// Invoked when the semantic segmentation model is downloaded and ready for use.
-        /// </summary>
         private void SemanticsManager_OnDataInitialized(ARSemanticSegmentationModelEventArgs args)
         {
             // Initialize the channel names in the dropdown menu.
@@ -92,9 +64,6 @@ namespace Niantic.Lightship.AR.Samples
             _channelDropdown.value = dropdownList.IndexOf(_semanticChannelName);
         }
 
-        /// <summary>
-        /// Callback when the semantic channel dropdown UI has a value change.
-        /// </summary>
         private void ChannelDropdown_OnValueChanged(int val)
         {
             // Update the display channel from the dropdown value.

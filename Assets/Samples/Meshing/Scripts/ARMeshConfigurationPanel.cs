@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Niantic.Lightship.AR.ARFoundation;
-using Niantic.Lightship.AR.ARFoundation.Meshing;
+// Copyright 2023 Niantic, Inc. All Rights Reserved.
+
+using Niantic.Lightship.AR.Meshing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +37,7 @@ public class ARMeshConfigurationPanel : MonoBehaviour
         _voxelSize = GameObject.Find("Voxel Size Value").GetComponent<InputField>();
         _voxelSize.text = _lightshipMeshingExtension.VoxelSize.ToString();
 
-        _enableDistanceBasedVolumetricCleanup = GameObject.Find("Distance Based Volumetric Cleanup Config").GetComponent<Toggle>();
+        _enableDistanceBasedVolumetricCleanup = GameObject.Find("Distance Based Volumetric Cleanup Config").GetComponent<SliderToggle>();
         _enableDistanceBasedVolumetricCleanup.isOn = _lightshipMeshingExtension.EnableDistanceBasedVolumetricCleanup;
 
         _blockSize = GameObject.Find("Block Size Value").GetComponent<InputField>();
@@ -48,7 +46,7 @@ public class ARMeshConfigurationPanel : MonoBehaviour
         _cullingDistance = GameObject.Find("Culling Distance Value").GetComponent<InputField>();
         _cullingDistance.text = _lightshipMeshingExtension.MeshCullingDistance.ToString();
 
-        _enableMeshDecimation = GameObject.Find("Mesh Decimation Config").GetComponent<Toggle>();
+        _enableMeshDecimation = GameObject.Find("Mesh Decimation Config").GetComponent<SliderToggle>();
         _enableMeshDecimation.isOn = _lightshipMeshingExtension.EnableMeshDecimation;
     }
 

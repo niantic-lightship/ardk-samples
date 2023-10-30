@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="3" y="3" width="48" height="48" rx="24" style="fill: rgb(231, 234, 237);"/>
+  <path d="M22.6667 21.9245C22.6667 20.4997 23.9047 18.333 26.7936 18.333C29.6825 18.333 31.3334 20.1683 31.3334 22.3636C31.3334 26.3151 26.7937 25.3747 26.7937 29.1663" stroke-width="2.16667" stroke-linecap="round" stroke-linejoin="round" style="fill: rgb(231, 234, 237); stroke: rgb(0, 0, 0);"/>
+  <circle cx="27" cy="34.5837" r="2.16667" style="fill: rgb(11, 0, 0);"/>
+</svg>

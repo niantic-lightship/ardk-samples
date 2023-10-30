@@ -1,8 +1,9 @@
+// Copyright 2023 Niantic, Inc. All Rights Reserved.
 using System;
+using Niantic.Lightship.AR.LocationAR;
+using Niantic.Lightship.AR.PersistentAnchors;
 using UnityEngine;
 using UnityEngine.UI;
-using Niantic.Lightship.AR.Subsystems;
-using UnityEngine.XR.ARSubsystems;
 
 public class VPSLocalizeDemo : MonoBehaviour
 {
@@ -84,6 +85,10 @@ public class VPSLocalizeDemo : MonoBehaviour
          {
              Debug.Log("ARLocation NOT TRACKING");
              _localizationStatusText.text = "NOT TRACKING";
+
+            // We de-activate the gameObject when we lose tracking.
+            // ARLocationManager will not de-activate it
+            args.ARLocation.gameObject.SetActive(false);
          }
     }
 }

@@ -1,3 +1,5 @@
+// Copyright 2023 Niantic, Inc. All Rights Reserved.
+using Niantic.Lightship.AR.LocationAR;
 using Niantic.Lightship.AR.Subsystems;
 using UnityEngine;
 using UnityEngine.Events;

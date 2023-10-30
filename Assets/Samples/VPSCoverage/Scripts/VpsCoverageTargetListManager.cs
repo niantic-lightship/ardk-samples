@@ -1,10 +1,11 @@
-// Copyright 2022 Niantic, Inc. All Rights Reserved.
+// Copyright 2023 Niantic, Inc. All Rights Reserved.
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using Niantic.Lightship.AR;
+using Niantic.Lightship.AR.VpsCoverage;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,7 +44,7 @@ public class VpsCoverageTargetListManager : MonoBehaviour
     private Text _queryRadiusText;
 
     [SerializeField] [Tooltip("Toggle GameObject to set location usage")]
-    private Toggle _useLocationToggle;
+    private SliderToggle _useLocationToggle;
 
     [SerializeField] [Tooltip("Text to display current toggle value")]
     private Text _useLocationText;
@@ -99,6 +100,7 @@ public class VpsCoverageTargetListManager : MonoBehaviour
     {
         _requestStatusText.text = "Requesting coverage from server...";
         _coverageClientManager.TryGetCoverage(OnTryGetCoverage);
+        _scrollList.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -227,7 +229,8 @@ public class VpsCoverageTargetListManager : MonoBehaviour
 
         if (area.LocalizabilityQuality == CoverageArea.Localizability.EXPERIMENTAL)
         {
-            coverageTargetListItem.BackgroundImageColor = new Color(1, 0.9409157f, 0.6933962f);
+            coverageTargetListItem.transform.Find("WayspotImage").Find("Quality").GetComponent<RawImage>().color = Color.yellow;
+            //coverageTargetListItem.BackgroundImageColor = new Color(1, 0.9409157f, 0.6933962f);
         }
 
         _coverageClientManager.TryGetImageFromUrl(target.ImageURL,
