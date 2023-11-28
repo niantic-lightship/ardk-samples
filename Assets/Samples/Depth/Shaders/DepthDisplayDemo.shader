@@ -1,10 +1,9 @@
-﻿Shader "Unlit/SemanticShader"
+Shader "Unlit/DepthDisplayDemo"
 {
     Properties
     {
         _MainTex ("_MainTex", 2D) = "white" {}
-        _SemanticTex ("_SemanticTex", 2D) = "red" {}
-        _Color ("_Color", Color) = (1,1,1,1)
+        _DepthTex ("_DepthTex", 2D) = "green" {}
     }
     SubShader
     {
@@ -29,12 +28,12 @@
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                float3 texcoord : TEXCOORD1;
+                float2 texcoord : TEXCOORD1;
                 float4 vertex : SV_POSITION;
 
             };
 
-            float4x4 _DisplayMatrix;
+            float4x4 _DisplayMat;
 
             v2f vert (appdata v)
             {
@@ -42,23 +41,27 @@
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
 
+                #if !UNITY_UV_STARTS_AT_TOP
+                o.uv.y = 1-o.uv.y;
+                #endif
+
                 //we need to adjust our image to the correct rotation and aspect.
-                o.texcoord = mul(_DisplayMatrix, float4(v.uv, 1.0f, 1.0f)).xyz;
-                
+                o.texcoord = mul(float3(o.uv, 1.0f), _DisplayMat).xy;
                 return o;
             }
 
             sampler2D _MainTex;
-            sampler2D _SemanticTex;
-            fixed4 _Color;
+            sampler2D _DepthTex;
 
             fixed4 frag (v2f i) : SV_Target
             {
-                //convert coordinate space
-                float2 semanticUV = float2(i.texcoord.x / i.texcoord.z, i.texcoord.y / i.texcoord.z);
-                
-                float4 semanticCol = tex2D(_SemanticTex, semanticUV);
-                return float4(semanticCol.r,semanticCol.g,semanticCol.b,0.8f);
+                float depth = tex2D(_DepthTex, i.texcoord).r;
+
+                const float MAX_VIEW_DISP = 4.0f;
+                const float scaledDisparity = 1.0f / depth;
+                const float normDisparity = scaledDisparity / MAX_VIEW_DISP;
+
+                return float4(normDisparity,normDisparity,normDisparity,1.0f);
             }
             ENDCG
         }

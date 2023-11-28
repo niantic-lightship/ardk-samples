@@ -1,4 +1,4 @@
-// Copyright 2023 Niantic, Inc. All Rights Reserved.
+// Copyright 2022-2023 Niantic.
 using System.Collections;
 using System.Collections.Generic;
 using Niantic.Lightship.AR.NavigationMesh;
@@ -68,7 +68,8 @@ public class LightshipNavMeshDevSample : MonoBehaviour
             Ray ray = _camera.ScreenPointToRay(_primaryTouch.ReadValue<Vector2>());
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit) &&
-                _navMeshManager.LightshipNavMesh.IsOnNavMesh(hit.point, 0.2f))
+                _navMeshManager.LightshipNavMesh.IsOnNavMesh(hit.point, 0.2f) &&
+                !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             {
                 if (_creature == null )
                 {
@@ -88,4 +89,5 @@ public class LightshipNavMeshDevSample : MonoBehaviour
             }
         }
     }
+
 }

@@ -14,17 +14,17 @@
         "com.unity.xr.management": "4.0.1",
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "1978137a585584820f1da06df95c0ef6b8c00ed3"
+      "hash": "7e30bd752fb0305a0c04fca5cc8f1a6ccce1a49e"
     },
     "com.nianticlabs.lightship.sharedar": {
       "version": "https://github.com/niantic-lightship/sharedar-upm.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.nianticlabs.lightship": "3.0.0-231026145955",
+        "com.nianticlabs.lightship": "3.1.0-231127183852",
         "com.unity.netcode.gameobjects": "1.2.0"
       },
-      "hash": "45fa14881f7c67bca6035d1c305410cd9750a840"
+      "hash": "c6d0d0f905a97f4d26d2d54b16462f9d0367ade1"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

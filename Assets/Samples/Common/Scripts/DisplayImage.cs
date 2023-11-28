@@ -1,4 +1,3 @@
-// Copyright 2023 Niantic, Inc. All Rights Reserved.
 using System.Text;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.UI;
@@ -160,4 +159,3 @@ namespace Niantic.Lightship.AR.Samples
         }
     }
 }
-

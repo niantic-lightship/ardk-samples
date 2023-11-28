@@ -1,5 +1,5 @@
-// Copyright 2023 Niantic, Inc. All Rights Reserved.
-using System.Collections;
+// Copyright 2022-2023 Niantic.
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +25,10 @@ public class SliderToggle : Toggle
 
     private void OnSwitch(bool on)
     {
-        uiHandleRectTransform.anchoredPosition =on? _handlePosition * -1: _handlePosition;
+        var Xvalue = on ? Math.Abs(_handlePosition.x) : Math.Abs(_handlePosition.x) * -1;
+        _handlePosition = new Vector2(Xvalue, _handlePosition.y);
+
+        uiHandleRectTransform.anchoredPosition =_handlePosition;
     }
     protected override void OnDestroy()
     {

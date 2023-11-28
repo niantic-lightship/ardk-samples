@@ -18,26 +18,24 @@ Shader "Custom/YetiShader"
     }
     SubShader
     {
-        Tags { "RenderType"="Geometry" }
+        Tags { "RenderType"="Geometry+200" }
         LOD 200
-        
- 
+
         Pass
         {
+            CGPROGRAM
             
-        CGPROGRAM
-        
-        #pragma vertex vert
-        #pragma fragment frag
-        
-        // Use shader model 3.0 target, to get nicer looking lighting
-        #pragma target 3.0
-        sampler2D _MainTex;
-        sampler2D _BumpMap;
-        sampler2D _ColorMask;
-        sampler2D _BWTex;
-        
-          #include "UnityCG.cginc"
+            #pragma vertex vert
+            #pragma fragment frag
+            
+            // Use shader model 3.0 target, to get nicer looking lighting
+            #pragma target 3.0
+            sampler2D _MainTex;
+            sampler2D _BumpMap;
+            sampler2D _ColorMask;
+            sampler2D _BWTex;
+            
+            #include "UnityCG.cginc"
             struct v2f
             {
                 float4 pos : SV_POSITION;
@@ -50,6 +48,7 @@ Shader "Custom/YetiShader"
             fixed4 _Color1;
             fixed4 _Color2;
             fixed4 _Color3;
+            
             v2f vert (appdata_base d)
             {
                 v2f o;
@@ -82,11 +81,11 @@ Shader "Custom/YetiShader"
                 return c;
          
             }
-        ENDCG
+            ENDCG
         }
         pass
         {
-         Tags{ "LightMode" = "ShadowCaster" }
+            Tags{ "LightMode" = "ShadowCaster" }
             CGPROGRAM
             #pragma vertex VSMain
             #pragma fragment PSMain

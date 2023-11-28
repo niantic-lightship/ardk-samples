@@ -1,4 +1,4 @@
-// Copyright 2023 Niantic, Inc. All Rights Reserved.
+// Copyright 2022-2023 Niantic.
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +9,7 @@ public class VersionRead : MonoBehaviour
     [SerializeField]
     private Text uiTextBox;
 
-    private const string SamplesVersion = "3.0.0";
+    private const string SamplesVersion = "3.1.0";
 
     // Start is called before the first frame update
     void Start()
