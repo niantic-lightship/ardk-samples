@@ -1,4 +1,4 @@
-// Copyright 2022-2023 Niantic.
+// Copyright 2022-2024 Niantic.
 using Niantic.Lightship.AR.LocationAR;
 using Niantic.Lightship.AR.PersistentAnchors;
 using UnityEngine;
@@ -19,7 +19,6 @@ namespace Niantic.Lightship.AR.Samples
         private void Start()
         {
             _arLocationManager.locationTrackingStateChanged += OnLocationTrackingStateChanged;
-            
             if (_arLocationManager.AutoTrack)
             {
                 HideARLocationMenu();

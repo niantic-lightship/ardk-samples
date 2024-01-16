@@ -14,17 +14,17 @@
         "com.unity.xr.management": "4.0.1",
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "7e30bd752fb0305a0c04fca5cc8f1a6ccce1a49e"
+      "hash": "25b2beb33da9682041071f80a8f75d47873cec3d"
     },
     "com.nianticlabs.lightship.sharedar": {
       "version": "https://github.com/niantic-lightship/sharedar-upm.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.nianticlabs.lightship": "3.1.0-231127183852",
+        "com.nianticlabs.lightship": "3.2.0-2401130645",
         "com.unity.netcode.gameobjects": "1.2.0"
       },
-      "hash": "c6d0d0f905a97f4d26d2d54b16462f9d0367ade1"
+      "hash": "afe1932733e26994c30cc59a3cb1f9d54e19af80"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -33,7 +33,7 @@
       "dependencies": {}
     },
     "com.unity.burst": {
-      "version": "1.6.6",
+      "version": "1.8.11",
       "depth": 3,
       "source": "registry",
       "dependencies": {
@@ -42,7 +42,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {
-      "version": "2.0.5",
+      "version": "2.2.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -73,7 +73,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.24",
+      "version": "3.0.26",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -82,7 +82,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.18",
+      "version": "2.0.22",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -98,7 +98,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
-      "version": "1.6.3",
+      "version": "1.7.0",
       "depth": 2,
       "source": "registry",
       "dependencies": {
@@ -114,12 +114,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.netcode.gameobjects": {
-      "version": "1.5.1",
+      "version": "1.7.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.nuget.mono-cecil": "1.10.1",
-        "com.unity.transport": "1.3.4"
+        "com.unity.transport": "1.4.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -209,7 +209,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.visualscripting": {
-      "version": "1.8.0",
+      "version": "1.9.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -262,7 +262,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.core-utils": {
-      "version": "2.2.1",
+      "version": "2.2.3",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -293,13 +293,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.openxr": {
-      "version": "1.8.1",
+      "version": "1.9.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.xr.management": "4.0.1",
+        "com.unity.xr.management": "4.4.0",
         "com.unity.xr.legacyinputhelpers": "2.1.2",
-        "com.unity.inputsystem": "1.4.4",
+        "com.unity.inputsystem": "1.6.3",
         "com.unity.xr.core-utils": "2.1.1"
       },
       "url": "https://packages.unity.com"

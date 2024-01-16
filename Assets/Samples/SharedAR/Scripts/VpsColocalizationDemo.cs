@@ -1,4 +1,4 @@
-// Copyright 2022-2023 Niantic.
+// Copyright 2022-2024 Niantic.
 
 using System;
 using UnityEngine;
@@ -117,7 +117,6 @@ namespace  Niantic.Lightship.AR.Samples
             _vpsCoverageTargetListManager.gameObject.SetActive(false);
             _localizationStatusPanel.SetActive(true);
             _localizationStatusText.text = "NOT TRACKING";
-            Debug.Log("Location selected");
         }
 
         private void OnColocalizationTrackingStateChanged(SharedSpaceManager.SharedSpaceManagerStateChangeEventArgs args)
@@ -136,8 +135,9 @@ namespace  Niantic.Lightship.AR.Samples
             }
             else
             {
-                Debug.Log("ARLocation NOT TRACKING");
-                _localizationStatusText.text = "NOT TRACKING";
+                if(_localizationStatusText != null){
+                    _localizationStatusText.text = "NOT TRACKING";
+                }
             }
         }
 

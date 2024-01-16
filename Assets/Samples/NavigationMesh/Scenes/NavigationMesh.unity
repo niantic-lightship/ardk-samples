@@ -203,13 +203,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5308226969993766816}
     m_Modifications:
+    - target: {fileID: 8075100970459568545, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075100970459568545, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075100970459568545, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075100970459568546, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075100970459568546, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 8075100970459568546, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8075100971000972496, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075100971000972496, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075100971000972496, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075100971000972511, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8075100971538771820, guid: b179b5701bd8c4299b1fd8148af5c630, type: 3}
       propertyPath: m_Text
@@ -2517,7 +2549,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4537664365738384973}
   m_HandleRect: {fileID: 4355388623993288313}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

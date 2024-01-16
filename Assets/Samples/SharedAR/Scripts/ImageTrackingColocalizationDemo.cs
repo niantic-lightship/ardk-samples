@@ -1,4 +1,4 @@
-// Copyright 2022-2023 Niantic.
+// Copyright 2022-2024 Niantic.
 
 using System.Collections;
 using UnityEngine;
@@ -40,8 +40,9 @@ namespace Niantic.Lightship.AR.Samples
         [SerializeField]
         private Texture2D _targetImage;
 
+        [FormerlySerializedAs("_targetImageSize")]
         [SerializeField]
-        private float _targetImageSize;
+        private float _targetImageWidthInMeters;
 
         private string _roomName;
 
@@ -63,6 +64,8 @@ namespace Niantic.Lightship.AR.Samples
             _netButtonsPanel.SetActive(true);
             _roomNameDisplayText.gameObject.SetActive(false);
             _targetImageInstructionPanel.SetActive(false);
+
+            _roomNameInputField.onValueChanged.AddListener(OnPinValueChane);
 
         }
 
@@ -111,7 +114,7 @@ namespace Niantic.Lightship.AR.Samples
         public void StartNewRoom()
         {
             var imageTrackingOptions = ISharedSpaceTrackingOptions.CreateImageTrackingOptions(
-                _targetImage, _targetImageSize);
+                _targetImage, _targetImageWidthInMeters);
 
             // generate a new room name 3 digit number
             int code = (int)Random.Range(0.0f, 999.0f);
@@ -127,7 +130,7 @@ namespace Niantic.Lightship.AR.Samples
         public void Join()
         {
             var imageTrackingOptions = ISharedSpaceTrackingOptions.CreateImageTrackingOptions(
-                _targetImage, _targetImageSize);
+                _targetImage, _targetImageWidthInMeters);
 
             //set room name from text box
             _roomName = _roomNameInputField.text;
@@ -177,6 +180,18 @@ namespace Niantic.Lightship.AR.Samples
                 // show the UI panel for ending
                 _endPanelText.text = "Disconnected from network";
                 _endPanel.SetActive(true);
+            }
+        }
+        //Enforce 10 character limit on room name
+        private void OnPinValueChane(string newPin)
+        {
+            if (newPin.Length > 10)
+            {
+                _roomNameInputField.text = newPin.Substring(0, 10);
+            }
+            else
+            {
+                _roomNameInputField.text = newPin;
             }
         }
 

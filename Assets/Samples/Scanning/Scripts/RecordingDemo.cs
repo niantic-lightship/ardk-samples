@@ -1,4 +1,4 @@
-// Copyright 2022-2023 Niantic.
+// Copyright 2022-2024 Niantic.
 using System;
 using System.Linq;
 using System.Threading.Tasks;

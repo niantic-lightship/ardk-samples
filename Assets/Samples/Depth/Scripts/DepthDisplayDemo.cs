@@ -1,3 +1,4 @@
+// Copyright 2022-2024 Niantic.
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,8 +53,11 @@ public class DepthDisplayDemo : MonoBehaviour
         //get the display matrix
         _displayMat = args.displayMatrix ?? Matrix4x4.identity;
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+        #if UNITY_ANDROID
             _displayMat = _displayMat.transpose;
-#endif
+            #if UNITY_EDITOR
+                _displayMat = _displayMat.inverse;
+            #endif
+        #endif
     }
 }

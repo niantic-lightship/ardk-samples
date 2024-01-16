@@ -847,7 +847,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 48
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 48
     m_Alignment: 4
@@ -1304,7 +1304,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  m_HasMigratedActions: 1
 --- !u!114 &792766267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1661,7 +1660,7 @@ MonoBehaviour:
   _roomNameInputField: {fileID: 480976074}
   _roomNameDisplayText: {fileID: 1796895299}
   _targetImage: {fileID: 2800000, guid: 14766a2b9b48f4634af7d10d7d16332a, type: 3}
-  _targetImageSize: 0.09
+  _targetImageWidthInMeters: 0.09
 --- !u!1 &1258736103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2866,7 +2865,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2496361878578862726}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

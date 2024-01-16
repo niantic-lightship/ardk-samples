@@ -1,4 +1,4 @@
-// Copyright 2022-2023 Niantic.
+// Copyright 2022-2024 Niantic.
 using System;
 using Niantic.Lightship.AR.LocationAR;
 using Niantic.Lightship.AR.PersistentAnchors;
@@ -69,7 +69,6 @@ public class VPSLocalizeDemo : MonoBehaviour
         _arLocationManager.StartTracking();
 
         _vpsCoverageTargetListManager.gameObject.SetActive(false);
-        Debug.Log("Location selected, ARLocation NOT TRACKING");
         _localizationStatusText.text = "NOT TRACKING";
         _localizationStatusPanel.SetActive(true);
     }
@@ -78,14 +77,13 @@ public class VPSLocalizeDemo : MonoBehaviour
     {
          if (args.Tracking)
          {
-            Debug.Log("ARLocation TRACKING");
             _localizationStatusText.text = "TRACKING";
          }
          else
          {
-             Debug.Log("ARLocation NOT TRACKING");
-             _localizationStatusText.text = "NOT TRACKING";
-
+            if(_localizationStatusText != null){
+                _localizationStatusText.text = "NOT TRACKING";
+            }
             // We de-activate the gameObject when we lose tracking.
             // ARLocationManager will not de-activate it
             args.ARLocation.gameObject.SetActive(false);

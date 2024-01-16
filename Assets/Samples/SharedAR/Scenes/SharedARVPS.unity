@@ -1574,7 +1574,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  m_HasMigratedActions: 1
 --- !u!1 &1453091326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,15 +1881,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3624323127979621647, guid: 0aba5a004507a455cb9fcc7d34e544c1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 950
+      value: 925
       objectReference: {fileID: 0}
     - target: {fileID: 3624323127979621647, guid: 0aba5a004507a455cb9fcc7d34e544c1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 200
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3624323129124927066, guid: 0aba5a004507a455cb9fcc7d34e544c1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -135.23376
       objectReference: {fileID: 0}
     - target: {fileID: 3624323129124927066, guid: 0aba5a004507a455cb9fcc7d34e544c1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.000579834
       objectReference: {fileID: 0}
     - target: {fileID: 3624323129124927069, guid: 0aba5a004507a455cb9fcc7d34e544c1, type: 3}
       propertyPath: m_Padding.m_Top
