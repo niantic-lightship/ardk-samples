@@ -38,4 +38,4 @@ These packages are included in the sample project:
 
 [sharedar-upm](https://github.com/niantic-lightship/sharedar-upm)
 
-[Vector Graphics](com.unity.vectorgraphics)
+[Vector Graphics](https://docs.unity3d.com/Packages/com.unity.vectorgraphics@2.0/manual/index.html)
