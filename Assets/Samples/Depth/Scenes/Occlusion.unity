@@ -318,7 +318,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  m_HasMigratedActions: 1
 --- !u!114 &15303251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3302,7 +3301,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8370430298551712982
 GameObject:
@@ -3589,7 +3588,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8484603505372793176}
   m_HandleRect: {fileID: 8590381805870965100}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3684,7 +3683,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8484566335176710750}
   m_HandleRect: {fileID: 8589603573386388608}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

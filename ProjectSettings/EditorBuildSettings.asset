@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Samples/Scanning/Scenes/Recording.unity
     guid: a8b815c6414994643b8e7a33e5b2ccf2
+  - enabled: 1
+    path: Assets/Samples/ObjectDetection/Scenes/ObjectDetection.unity
+    guid: 44d3900bd5e104354a9ec8cdd17db747
   m_configObjects:
     Niantic.Lightship.AR.LightshipSettings: {fileID: 11400000, guid: 05b0489c7d3114fe3b5a5321c06a66dd, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 0ba5772da672041b0b49b09b47e32b89, type: 2}

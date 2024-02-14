@@ -720,7 +720,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  m_HasMigratedActions: 1
 --- !u!114 &1707842885 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7853223644046641600, guid: 6cc3b330aa7d14746bc20c3e4eea9278, type: 3}
@@ -798,6 +797,7 @@ MonoBehaviour:
   _defaultAnchorGameobject: {fileID: 0}
   _ContinuousLocalizationEnabled: 0
   _InterpolationEnabled: 0
+  ContinuousLocalizationRateSeconds: 0
   _autoTrack: 0
 --- !u!1 &1886981095
 GameObject:
@@ -1175,6 +1175,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 309273627}
     m_Modifications:
+    - target: {fileID: 758611827590411904, guid: 2985388ab93434d16858614507aaabb7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 758611827590411904, guid: 2985388ab93434d16858614507aaabb7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 931017610958693908, guid: 2985388ab93434d16858614507aaabb7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

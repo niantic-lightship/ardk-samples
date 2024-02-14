@@ -1288,7 +1288,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  m_HasMigratedActions: 1
 --- !u!1 &471045078
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,7 +2331,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1479713008812490511
 GameObject:
@@ -4542,7 +4541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1561dbca3fb743ffbb4de1a52c23683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: 5adf8e3cd7b3740e9821be86fed913b7, type: 3}
+  textFile: {fileID: 4900000, guid: 7a0825ac531604c2ab22aa834759805e, type: 3}
   uiTextBox: {fileID: 4343415682408096583}
 --- !u!114 &7511022130979595480
 MonoBehaviour:

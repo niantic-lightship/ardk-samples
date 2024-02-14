@@ -856,7 +856,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  m_HasMigratedActions: 1
 --- !u!114 &1856749851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1685,6 +1684,14 @@ PrefabInstance:
     - target: {fileID: 6041567961857939233, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
       propertyPath: m_Text
       value: Allow Ground Only
+      objectReference: {fileID: 0}
+    - target: {fileID: 6114868043981258730, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6114868043981258730, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6233551979576708404, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
       propertyPath: m_AnchorMax.x

@@ -14,17 +14,17 @@
         "com.unity.xr.management": "4.0.1",
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "25b2beb33da9682041071f80a8f75d47873cec3d"
+      "hash": "7cc172749e6577d934f1af4719c2de9fb78a205f"
     },
     "com.nianticlabs.lightship.sharedar": {
       "version": "https://github.com/niantic-lightship/sharedar-upm.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.nianticlabs.lightship": "3.2.0-2401130645",
+        "com.nianticlabs.lightship": "3.3.0-2402121803",
         "com.unity.netcode.gameobjects": "1.2.0"
       },
-      "hash": "afe1932733e26994c30cc59a3cb1f9d54e19af80"
+      "hash": "8f1873a13c5ab23a0ecb547178c803cf456930ff"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -42,7 +42,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {
-      "version": "2.2.0",
+      "version": "2.0.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -73,7 +73,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.26",
+      "version": "3.0.24",
       "depth": 0,
       "source": "registry",
       "dependencies": {

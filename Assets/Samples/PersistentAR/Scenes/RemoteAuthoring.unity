@@ -267,7 +267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000043953252}
+  m_AnchoredPosition: {x: 0, y: -0.00010608128}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &208051245
@@ -835,6 +835,7 @@ MonoBehaviour:
   _defaultAnchorGameobject: {fileID: 0}
   _ContinuousLocalizationEnabled: 0
   _InterpolationEnabled: 0
+  ContinuousLocalizationRateSeconds: 0
   _autoTrack: 0
 --- !u!114 &958724722
 MonoBehaviour:
@@ -1152,7 +1153,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  m_HasMigratedActions: 1
 --- !u!114 &1187756101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1723,8 +1723,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 311570636}
   m_HandleRect: {fileID: 311570635}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.99999535
+  m_Value: 1
+  m_Size: 0.9999429
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2199,7 +2199,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3215597163919159007
 GameObject:
@@ -2455,7 +2455,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3256756221199365701}
   m_HandleRect: {fileID: 3438788962323040411}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

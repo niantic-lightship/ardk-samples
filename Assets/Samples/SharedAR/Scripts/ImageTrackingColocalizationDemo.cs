@@ -185,9 +185,9 @@ namespace Niantic.Lightship.AR.Samples
         //Enforce 10 character limit on room name
         private void OnPinValueChane(string newPin)
         {
-            if (newPin.Length > 10)
+            if (newPin.Length > 6)
             {
-                _roomNameInputField.text = newPin.Substring(0, 10);
+                _roomNameInputField.text = newPin.Substring(0, 6);
             }
             else
             {
