@@ -17,7 +17,7 @@ public class SceneSwitcher : MonoBehaviour, ISerializationCallbackReceiver
 
     [SerializeField] private bool _stopSubsystems;
 
-    private HashSet<string> PortraitScenes = new HashSet<string>() {"Home","RemoteAuthoring" };
+    private HashSet<string> PortraitScenes = new HashSet<string>() {"Home","RemoteAuthoring","CompassScene" };
     public void SwitchToScene()
     {
         OrientationPicker();

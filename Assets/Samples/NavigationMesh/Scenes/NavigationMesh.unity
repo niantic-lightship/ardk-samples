@@ -1432,6 +1432,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 678666251}
+    - target: {fileID: 1036115691456179861, guid: 92df391c1600a4e45b690c3e03492888, type: 3}
+      propertyPath: _layerMask.m_Bits
+      value: 320
+      objectReference: {fileID: 0}
     - target: {fileID: 1036115691456179862, guid: 92df391c1600a4e45b690c3e03492888, type: 3}
       propertyPath: m_Name
       value: LightshipNavMeshManager
@@ -2548,7 +2552,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4537664365738384973}
   m_HandleRect: {fileID: 4355388623993288313}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2613,7 +2617,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4537768588819123531}
   m_HandleRect: {fileID: 4355612702388810645}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2955,7 +2959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9e04aaf299f4022b526651a7bd4284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetScene: {fileID: 102900000, guid: 1bba4cece25a3458f8d2983b1cd85e83, type: 3}
+  _targetScene: {fileID: 102900000, guid: ca5e717807acf4f0eac815ac612d2331, type: 3}
   _targetSceneName: Home
   _stopSubsystems: 0
 --- !u!222 &5064615390765109684

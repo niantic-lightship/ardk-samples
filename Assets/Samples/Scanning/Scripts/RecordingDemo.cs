@@ -19,6 +19,11 @@ namespace Niantic.Lightship.AR.Samples
         [SerializeField]
         private ARScanningManager _arScanningManager;
         
+        [Tooltip("Framerate at which the scan is recorded")]
+        [Range(1, 30)]
+        [SerializeField]
+        private int _scanRecordingFramerate = 30;
+        
         [Tooltip("The manager used to render the device camera feed")]
         [SerializeField]
         private ARCameraManager _arCameraManager;
@@ -99,6 +104,7 @@ namespace Niantic.Lightship.AR.Samples
         public void StartScanning()
         {
             _saveScanPanel.SetActive(false);
+            _arScanningManager.ScanRecordingFramerate = _scanRecordingFramerate;
             _arScanningManager.enabled = true;
         }
 

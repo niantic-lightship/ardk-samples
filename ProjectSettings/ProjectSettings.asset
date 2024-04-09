@@ -48,6 +48,7 @@ PlayerSettings:
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
+  unsupportedMSAAFallback: 0
   m_MTRendering: 1
   mipStripping: 0
   numberOfMipsStripped: 0
@@ -121,6 +122,7 @@ PlayerSettings:
   switchNVNOtherPoolsGranularity: 16777216
   switchNVNMaxPublicTextureIDCount: 0
   switchNVNMaxPublicSamplerIDCount: 0
+  switchMaxWorkerMultiple: 8
   stadiaPresentMode: 0
   stadiaTargetFramerate: 0
   vulkanNumSwapchainBuffers: 3
@@ -134,8 +136,17 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 3.3.0
-  preloadedAssets: []
+  bundleVersion: 3.4.0
+  preloadedAssets:
+  - {fileID: 4800000, guid: b02d09082cbc14569ae46c12d9836abc, type: 3}
+  - {fileID: 4800000, guid: e7c77f6eaab324a819efdc13b8125a39, type: 3}
+  - {fileID: 4800000, guid: 6743a50a812740be8c0aa3fccc46fae9, type: 3}
+  - {fileID: 11400000, guid: 217d86e680eb34b97bb0bb2a6ec7bfac, type: 2}
+  - {fileID: -2230314042023013495, guid: 35d0a95eeda964a40a7be7be884e643f, type: 2}
+  - {fileID: -5192657150083383940, guid: 2751b5cd4300340c38aef3e21700408a, type: 2}
+  - {fileID: 11400000, guid: 05b0489c7d3114fe3b5a5321c06a66dd, type: 2}
+  - {fileID: 4800000, guid: b1d4c517492046e1a4e4cc49b0b73b42, type: 3}
+  - {fileID: 4800000, guid: 2b7e3540272684e0b8e12fed2c4609de, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -619,7 +630,7 @@ PlayerSettings:
   switchSocketConcurrencyLimit: 14
   switchScreenResolutionBehavior: 2
   switchUseCPUProfiler: 0
-  switchUseGOLDLinker: 0
+  switchEnableFileSystemTrace: 0
   switchLTOSetting: 0
   switchApplicationID: 0x01004b9000490000
   switchNSODependencies: 
@@ -748,7 +759,6 @@ PlayerSettings:
   switchSocketBufferEfficiency: 4
   switchSocketInitializeEnabled: 1
   switchNetworkInterfaceManagerInitializeEnabled: 1
-  switchPlayerConnectionEnabled: 1
   switchUseNewStyleFilepaths: 0
   switchUseLegacyFmodPriorities: 1
   switchUseMicroSleepForYield: 1

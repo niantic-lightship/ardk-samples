@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 341047656}
   - component: {fileID: 341047657}
   - component: {fileID: 341047658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Meshing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,6 +309,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb5f1c49293fa4f0cb01b0a1a1da46d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &456496685 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5810936217229340723, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
+  m_PrefabInstance: {fileID: 2839590004089436501}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &870156088
@@ -414,6 +425,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbd22d1599cd9431ba59d2fd96b09cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &969978483 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4604184557050157678, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
+  m_PrefabInstance: {fileID: 2839590004089436501}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1187123113
@@ -869,6 +891,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetFrameRate: 20
+--- !u!114 &1885234901 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8132318120094165724, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
+  m_PrefabInstance: {fileID: 2839590004089436501}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1934332109
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,9 +955,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1928825742, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
+      propertyPath: _enableAllowList
+      value: 
+      objectReference: {fileID: 1885234901}
+    - target: {fileID: 1928825742, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
+      propertyPath: _enableBlockList
+      value: 
+      objectReference: {fileID: 456496685}
+    - target: {fileID: 1928825742, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
       propertyPath: _meshingExtension
       value: 
       objectReference: {fileID: 341047658}
+    - target: {fileID: 1928825742, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
+      propertyPath: _disableMeshFiltering
+      value: 
+      objectReference: {fileID: 969978483}
     - target: {fileID: 625701350852434673, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1555,7 +1600,7 @@ PrefabInstance:
       objectReference: {fileID: 1826684599}
     - target: {fileID: 4604184557050157678, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4604184557050157678, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1639,7 +1684,7 @@ PrefabInstance:
       objectReference: {fileID: 1826684599}
     - target: {fileID: 5810936217229340723, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5810936217229340723, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1795,7 +1840,7 @@ PrefabInstance:
       objectReference: {fileID: 1826684599}
     - target: {fileID: 8132318120094165724, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8132318120094165724, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode

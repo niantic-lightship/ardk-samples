@@ -4,32 +4,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Niantic.Lightship.AR.Meshing;
+using UnityEngine.UI;
 
 public class MeshingFiltering : MonoBehaviour
 {
     [SerializeField]
     private LightshipMeshingExtension _meshingExtension;
 
-    private bool _disableMeshFiltering = true;
-    private bool _enableAllowList = false;
-    private bool _enableBlockList = false;
+
+    [SerializeField]
+    private Toggle _disableMeshFiltering;
+    [SerializeField]
+    private Toggle _enableAllowList;
+    [SerializeField]
+    private Toggle _enableBlockList;
 
     // Start is called before the first frame update
     void Start()
     {
         _meshingExtension.AllowList = new List<string>() { "ground" };
-        _meshingExtension.BlockList = new List<string>() { "sky", "person", "water", "pet_experimental" };
+        _meshingExtension.BlockList = new List<string>() { "sky", "person", "water", "pet_experimental", "loungeable_experimental"};
         DisableMeshFiltering();
-    }
-
-    public void ToggleMeshFiltering(){
-        _disableMeshFiltering = !_disableMeshFiltering;
-    }
-    public void ToggleAllowList(){
-        _enableAllowList = !_enableAllowList;
-    }
-    public void ToggleBlockList(){
-        _enableBlockList = !_enableBlockList;
     }
 
     // Update is called once per frame
@@ -41,8 +36,8 @@ public class MeshingFiltering : MonoBehaviour
     }
 
     public void ConfigureMeshFiltering(){
-        _meshingExtension.IsMeshFilteringEnabled = !_disableMeshFiltering;
-        _meshingExtension.IsFilteringAllowListEnabled = _enableAllowList;
-        _meshingExtension.IsFilteringBlockListEnabled = _enableBlockList;
+        _meshingExtension.IsMeshFilteringEnabled = !_disableMeshFiltering.isOn;
+        _meshingExtension.IsFilteringAllowListEnabled = _enableAllowList.isOn;
+        _meshingExtension.IsFilteringBlockListEnabled = _enableBlockList.isOn;
     }
 }

@@ -1,5 +1,5 @@
 # Lightship ARDK Samples
-This Unity package provides Sample Scenes with easy-to-understand examples for many of the Lightship ARDK 3.3 features.
+This Unity package provides Sample Scenes with easy-to-understand examples for many of the Lightship ARDK 3.4 features.
 
 ## __Quick links:__
 * [ARDK API Reference](https://lightship.dev/docs/ardk/apiref/Niantic/)
@@ -38,4 +38,4 @@ These packages are included in the sample project:
 
 [sharedar-upm](https://github.com/niantic-lightship/sharedar-upm)
 
-Unity Vector Graphics
+[Vector Graphics](com.unity.vectorgraphics)

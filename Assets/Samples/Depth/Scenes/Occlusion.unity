@@ -190,16 +190,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetFrameRate: 20
   _optimalOcclusionDistanceMode: 1
+  _preferSmoothEdges: 0
   _principalOccludee: {fileID: 623103373}
+  _isOcclusionStabilizationEnabled: 0
   _isOcclusionSuppressionEnabled: 0
-  _semanticSegmentationManager: {fileID: 15303247}
   _suppressionChannels:
   - sky
   - ground
-  _isOcclusionStabilizationEnabled: 0
-  _meshManager: {fileID: 739310442}
   _useCustomBackgroundMaterial: 0
   _customBackgroundMaterial: {fileID: 0}
+  _bypassOcclusionManagerUpdates: 0
+  _semanticSegmentationManager: {fileID: 15303247}
+  _meshManager: {fileID: 739310442}
 --- !u!114 &15303249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,7 +937,7 @@ GameObject:
   - component: {fileID: 739310444}
   - component: {fileID: 739310442}
   - component: {fileID: 739310443}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Meshing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2420,7 +2422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9e04aaf299f4022b526651a7bd4284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetScene: {fileID: 102900000, guid: 1bba4cece25a3458f8d2983b1cd85e83, type: 3}
+  _targetScene: {fileID: 102900000, guid: ca5e717807acf4f0eac815ac612d2331, type: 3}
   _targetSceneName: Home
   _stopSubsystems: 0
 --- !u!95 &620867774209411617

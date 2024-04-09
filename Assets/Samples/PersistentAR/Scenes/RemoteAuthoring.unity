@@ -267,7 +267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00010608128}
+  m_AnchoredPosition: {x: 0, y: -0.00009673988}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &208051245
@@ -835,7 +835,6 @@ MonoBehaviour:
   _defaultAnchorGameobject: {fileID: 0}
   _ContinuousLocalizationEnabled: 0
   _InterpolationEnabled: 0
-  ContinuousLocalizationRateSeconds: 0
   _autoTrack: 0
 --- !u!114 &958724722
 MonoBehaviour:
@@ -1723,8 +1722,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 311570636}
   m_HandleRect: {fileID: 311570635}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9999429
+  m_Value: 0
+  m_Size: 0.9999983
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3243,7 +3242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9e04aaf299f4022b526651a7bd4284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetScene: {fileID: 102900000, guid: 1bba4cece25a3458f8d2983b1cd85e83, type: 3}
+  _targetScene: {fileID: 102900000, guid: ca5e717807acf4f0eac815ac612d2331, type: 3}
   _targetSceneName: Home
   _stopSubsystems: 0
 --- !u!95 &5769301702103459386

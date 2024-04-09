@@ -603,7 +603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HumanSegmentationStencilMode: 0
   m_HumanSegmentationDepthMode: 0
-  m_EnvironmentDepthMode: 1
+  m_EnvironmentDepthMode: 3
   m_EnvironmentDepthTemporalSmoothing: 1
   m_OcclusionPreferenceMode: 0
 --- !u!114 &1765179297
@@ -619,6 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetFrameRate: 20
+  _preferSmoothEdges: 0
   _optimalOcclusionDistanceMode: 0
   _principalOccludee: {fileID: 0}
   _isOcclusionSuppressionEnabled: 0
@@ -2047,7 +2048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9e04aaf299f4022b526651a7bd4284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetScene: {fileID: 102900000, guid: 1bba4cece25a3458f8d2983b1cd85e83, type: 3}
+  _targetScene: {fileID: 102900000, guid: ca5e717807acf4f0eac815ac612d2331, type: 3}
   _targetSceneName: Home
   _stopSubsystems: 0
 --- !u!114 &3249707706071556360

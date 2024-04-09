@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5002281369233153173}
   - component: {fileID: 252096253453997081}
   - component: {fileID: 7893389973303568606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RenderedMeshPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
