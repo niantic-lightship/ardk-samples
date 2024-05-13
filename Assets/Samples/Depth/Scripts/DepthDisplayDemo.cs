@@ -1,63 +1,98 @@
 // Copyright 2022-2024 Niantic.
-using System;
+
+using Niantic.Lightship.AR.Occlusion;
+using Niantic.Lightship.AR.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
 
 public class DepthDisplayDemo : MonoBehaviour
 {
-    public ARCameraManager _cameraManager;
+    [SerializeField]
+    private AROcclusionManager _occlusionManager;
 
-    public AROcclusionManager _occlusionManager;
+    [SerializeField]
+    private LightshipOcclusionExtension _occlusionExtension;
+    
+    [SerializeField]
+    private RawImage _rawImage;
 
-    public RawImage _rawImage;
+    [SerializeField]
+    private Material _material;
 
-    public Material _material;
+    private bool _displayInterpolatedDepth = true;
 
-    private Matrix4x4 _displayMat = Matrix4x4.identity;
-
-    void OnEnable()
+    private void Start()
     {
-        _cameraManager.frameReceived += OnCameraFrameUpdate;
-    }
-
-    private void OnDisable()
-    {
-        _cameraManager.frameReceived -= OnCameraFrameUpdate;
-    }
-
-    void Update()
-    {
-        if (!_occlusionManager.subsystem.running)
-        {
-            return;
-        }
-
-        //add our material to the raw image
+        // Assign the material to the raw image
         _rawImage.material = _material;
-
-        //set our variables in our shader
-        //NOTE: Updating the depth texture needs to happen in the Update() function
-        _rawImage.material.SetTexture("_DepthTex", _occlusionManager.environmentDepthTexture);
-        _rawImage.material.SetMatrix("_DisplayMat", _displayMat);
     }
 
-    private void OnCameraFrameUpdate(ARCameraFrameEventArgs args)
+    private void Update()
     {
         if (!_occlusionManager.subsystem.running)
         {
             return;
         }
 
-        //get the display matrix
-        _displayMat = args.displayMatrix ?? Matrix4x4.identity;
+        if (!_displayInterpolatedDepth)
+        {
+            DisplayDepth();
+        }
+        else
+        {
+            DisplayInterpolatedDepth();
+        }
+    }
 
-        #if UNITY_ANDROID
-            _displayMat = _displayMat.transpose;
-            #if UNITY_EDITOR
-                _displayMat = _displayMat.inverse;
-            #endif
-        #endif
+    /// <summary>
+    /// In this method we show how to correctly display the depth image on screen.
+    /// </summary>
+    private void DisplayDepth()
+    {
+        // In this example, we acquire the depth image from AR Foundation's occlusion
+        // manager. This image has the same aspect ratio as the AR background image.
+        var texture = _occlusionManager.environmentDepthTexture;
+        
+        // We use Lightship's math library to calculate a display matrix that fits
+        // the depth image to the screen.
+        var displayMatrix = CameraMath.CalculateDisplayMatrix
+        (
+            texture.width,
+            texture.height,
+            Screen.width,
+            Screen.height,
+            XRDisplayContext.GetScreenOrientation()
+        );
+        
+        // Update the material
+        _rawImage.material.SetTexture("_DepthTex", texture);
+        _rawImage.material.SetMatrix("_DepthTransform", displayMatrix);
+    }
+    
+    /// <summary>
+    /// In this method we show how to display interpolated depth on screen using Lightship Occlusion Extension.
+    /// </summary>
+    private void DisplayInterpolatedDepth()
+    {
+        // In this example, we acquire the depth image from Lightship's AR occlusion
+        // extension. The aspect ratio of this image is not guaranteed to match the
+        // AR background image.
+        var texture = _occlusionExtension.DepthTexture;
+        
+        // Besides the depth texture, the occlusion extension also provides an appropriate
+        // transformation matrix to display depth on screen. This matrix is different from
+        // a traditional display matrix, because it also contains warping to compensate for
+        // missing frames.
+        var displayMatrix = _occlusionExtension.DepthTransform;
+        
+        // Update the material
+        _rawImage.material.SetTexture("_DepthTex", texture);
+        _rawImage.material.SetMatrix("_DepthTransform", displayMatrix);
+    }
+
+    public void ToggleInterpolation()
+    {
+        _displayInterpolatedDepth = !_displayInterpolatedDepth;
     }
 }

@@ -9,8 +9,8 @@ Shader "Unlit/DepthDisplayDemo"
     {
         Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
         Blend SrcAlpha OneMinusSrcAlpha
-        // No culling or depth
         Cull Off ZWrite Off ZTest Always
+        
         Pass
         {
             CGPROGRAM
@@ -27,41 +27,54 @@ Shader "Unlit/DepthDisplayDemo"
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
-                float2 texcoord : TEXCOORD1;
+                float3 texcoord : TEXCOORD0;
                 float4 vertex : SV_POSITION;
 
             };
 
-            float4x4 _DisplayMat;
+            // Sampler for the depth texture
+            sampler2D _DepthTex;
+
+            // Transform from screen space to depth texture space
+            float4x4 _DepthTransform;
+
+            inline float ConvertDistanceToDepth(float d)
+            {
+                // Clip any distances smaller than the near clip plane, and compute the depth value from the distance.
+                return (d < _ProjectionParams.y) ? 0.0f : ((1.0f / _ZBufferParams.z) * ((1.0f / d) - _ZBufferParams.w));
+            }
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
 
-                #if !UNITY_UV_STARTS_AT_TOP
-                o.uv.y = 1-o.uv.y;
-                #endif
-
-                //we need to adjust our image to the correct rotation and aspect.
-                o.texcoord = mul(float3(o.uv, 1.0f), _DisplayMat).xy;
+                // Apply the image transformation to the UV coordinates
+                o.texcoord = mul(_DepthTransform, float4(v.uv, 1.0f, 1.0f)).xyz;
+                
                 return o;
             }
 
-            sampler2D _MainTex;
-            sampler2D _DepthTex;
-
             fixed4 frag (v2f i) : SV_Target
             {
-                float depth = tex2D(_DepthTex, i.texcoord).r;
+                // Since the depth image transform may contain reprojection (for warping)
+                // we need to convert the uv coordinates from homogeneous to cartesian
+                float2 depth_uv = float2(i.texcoord.x / i.texcoord.z, i.texcoord.y / i.texcoord.z);
 
-                const float MAX_VIEW_DISP = 4.0f;
-                const float scaledDisparity = 1.0f / depth;
-                const float normDisparity = scaledDisparity / MAX_VIEW_DISP;
+                // The depth value can be accessed by sampling the red channel
+                // The values in the texture are metric eye depth (distance from the camera)
+                float eyeDepth = tex2D(_DepthTex, depth_uv).r;
 
-                return float4(normDisparity,normDisparity,normDisparity,1.0f);
+                // Convert the eye depth to a z-buffer value
+                // The z-buffer value is a nonlinear value in the range [0, 1]
+                float depth = ConvertDistanceToDepth(eyeDepth);
+
+                // Use the z-value as color
+#ifdef UNITY_REVERSED_Z
+              return fixed4(depth, depth, depth, 1.0f);
+#else
+              return fixed4(1.0f - depth, 1.0f - depth, 1.0f - depth, 1.0f);
+#endif
             }
             ENDCG
         }

@@ -1,0 +1,1 @@
+This example demonstrates the accuracy of Lightship's World Positioning System, in comparison to that of the device's compass reading. Observe the superior stability and accuracy of the upper compass in the scene, which is using the World Positioning System, as compared to the lower compass in the scene, which is using the device's compass. 
