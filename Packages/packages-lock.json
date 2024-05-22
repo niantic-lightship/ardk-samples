@@ -14,7 +14,7 @@
         "com.unity.xr.management": "4.0.1",
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "0cd9238a47523608ba3958294a64e67a6f8b5d38"
+      "hash": "f646e81d91662fb9d20abcc28b167e2d17a87000"
     },
     "com.nianticlabs.lightship.sharedar": {
       "version": "https://github.com/niantic-lightship/sharedar-upm.git",
@@ -24,7 +24,7 @@
         "com.nianticlabs.lightship": "3.5.0-2405101709",
         "com.unity.netcode.gameobjects": "1.2.0"
       },
-      "hash": "b49530bcf166c15cebbed710a3d4f273d368c5e1"
+      "hash": "d5a201f4daef3a354a46eca3bfd8e7ae7d2a67d4"
     },
     "com.nianticlabs.lightship.wps": {
       "version": "https://github.com/niantic-lightship/wps-upm.git",
@@ -34,7 +34,7 @@
         "com.nianticlabs.lightship": "3.5.0-2405101709",
         "com.unity.xr.management": "4.0.1"
       },
-      "hash": "9f48ff3ec8d7a53973a207cef2d89fbf0498b857"
+      "hash": "701f1c65757e801411010eacb56a6f27937a53f3"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
