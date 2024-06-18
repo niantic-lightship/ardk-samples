@@ -1,3 +1,4 @@
+// Copyright 2022-2024 Niantic.
 using System.Collections.Generic;
 
 using Unity.Collections;

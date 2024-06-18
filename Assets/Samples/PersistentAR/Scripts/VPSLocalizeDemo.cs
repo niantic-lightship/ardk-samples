@@ -1,8 +1,14 @@
+// Copyright 2022-2024 Niantic.
 using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+using Niantic.Lightship.AR.LocationAR;
+using Niantic.Lightship.AR.PersistentAnchors;
+using Niantic.Lightship.AR.Subsystems;
+
 using UnityEngine;
 using UnityEngine.UI;
-using Niantic.Lightship.AR.Subsystems;
-using UnityEngine.XR.ARSubsystems;
 
 public class VPSLocalizeDemo : MonoBehaviour
 {
@@ -12,6 +18,9 @@ public class VPSLocalizeDemo : MonoBehaviour
     private ARLocationManager _arLocationManager;
 
     [SerializeField]
+    private LocationMeshManager _meshManager;
+
+    [SerializeField]
     private Text _localizationStatusText;
 
     [SerializeField]
@@ -19,13 +28,26 @@ public class VPSLocalizeDemo : MonoBehaviour
 
     [SerializeField]
     private GameObject _anchorMarkerPrefab;
+    
+    [SerializeField]
+    private Toggle _downloadMeshToggle;
 
     //Holder object for the AR location payload.
     private GameObject _arLocationHolder;
+    
+    // Only attempt mesh download once per demo run. If it starts, it will not start again.
+    private bool _meshDownloadStarted;
+    private GameObject _downloadedMesh;
+    private bool _isTracking;
+
     private void Start()
     {
         _arLocationManager.locationTrackingStateChanged += OnLocationTrackingStateChanged;
         _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed += OnLocationSelected;
+        if (_downloadMeshToggle)
+        {
+            _downloadMeshToggle.onValueChanged.AddListener(OnDownloadMeshToggleValueChanged);
+        }
 
         _arLocationHolder = new GameObject("ARLocation");
         // The ARLocation will be enabled once the anchor starts tracking.
@@ -39,6 +61,16 @@ public class VPSLocalizeDemo : MonoBehaviour
         if (_arLocationHolder != null)
         {
             Destroy(_arLocationHolder);
+        }
+        
+        if (_downloadedMesh)
+        {
+            Destroy(_downloadedMesh);
+        }
+
+        if (_downloadMeshToggle)
+        {
+            _downloadMeshToggle.onValueChanged.RemoveListener(OnDownloadMeshToggleValueChanged);
         }
     }
 
@@ -68,7 +100,6 @@ public class VPSLocalizeDemo : MonoBehaviour
         _arLocationManager.StartTracking();
 
         _vpsCoverageTargetListManager.gameObject.SetActive(false);
-        Debug.Log("Location selected, ARLocation NOT TRACKING");
         _localizationStatusText.text = "NOT TRACKING";
         _localizationStatusPanel.SetActive(true);
     }
@@ -77,13 +108,45 @@ public class VPSLocalizeDemo : MonoBehaviour
     {
          if (args.Tracking)
          {
-            Debug.Log("ARLocation TRACKING");
             _localizationStatusText.text = "TRACKING";
+            _isTracking = true;
+            if (!_meshDownloadStarted && _downloadMeshToggle.isOn)
+            {
+                _meshDownloadStarted = true;
+                _ = DownloadAndPositionMeshAsync(location: args.ARLocation);
+            }
          }
          else
          {
-             Debug.Log("ARLocation NOT TRACKING");
-             _localizationStatusText.text = "NOT TRACKING";
+            if(_localizationStatusText != null){
+                _localizationStatusText.text = "NOT TRACKING";
+            }
+            
+            _isTracking = false;
+            // We de-activate the gameObject when we lose tracking.
+            // ARLocationManager will not de-activate it
+            args.ARLocation.gameObject.SetActive(false);
          }
+    }
+    
+    private async Task DownloadAndPositionMeshAsync(ARLocation location)
+    {
+        var payload = location.Payload;
+        var go = await _meshManager.GetLocationMeshForPayloadAsync(payload.ToBase64());
+        go.transform.SetParent(location.transform, false);
+        _downloadedMesh = go;
+    }
+
+    private void OnDownloadMeshToggleValueChanged(bool newValue)
+    {
+        if (newValue && _isTracking && !_meshDownloadStarted)
+        {
+            _meshDownloadStarted = true;
+            _ = DownloadAndPositionMeshAsync(_arLocationManager.ARLocations.First());
+        }
+        else if(_meshDownloadStarted && _downloadedMesh)
+        {
+            _downloadedMesh.SetActive(newValue);
+        }
     }
 }

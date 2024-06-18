@@ -1,0 +1,3 @@
+In this example, we create and render a depth buffer from the phone's camera.
+
+To toggle the effect, tap on the settings button, and use the toggler button.

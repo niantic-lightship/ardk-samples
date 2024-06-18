@@ -1,4 +1,4 @@
-// Copyright 2023 Niantic, Inc. All Rights Reserved.
+// Copyright 2022-2024 Niantic.
 
 using Niantic.Lightship.AR.Samples;
 using Unity.Netcode;

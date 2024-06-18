@@ -1,4 +1,4 @@
-// Copyright 2023 Niantic, Inc. All Rights Reserved.
+// Copyright 2022-2024 Niantic.
 
 using System;
 using UnityEngine;
@@ -15,6 +15,9 @@ namespace  Niantic.Lightship.AR.Samples
 
         [SerializeField]
         private VpsCoverageTargetListManager _vpsCoverageTargetListManager;
+
+        [SerializeField]
+        private AnimationToggle _panelToggle;
 
         [SerializeField]
         private SharedSpaceManager _sharedSpaceManager;
@@ -66,15 +69,19 @@ namespace  Niantic.Lightship.AR.Samples
             {
                 // Hide coverage list panel and show connction button
                 _vpsCoverageTargetListManager.gameObject.SetActive(false);
+                _panelToggle.CloseState(); // hide the panel for location search
                 // Set room to connect
                 var vpsTrackingOptions = ISharedSpaceTrackingOptions.CreateMockTrackingOptions();
                 var roomOptions = ISharedSpaceRoomOptions.CreateLightshipRoomOptions(
                     _roomNamePrefix + "SkippingVpsRoom",32, "vps colocalization demo");
+                _sharedSpaceManager.StartSharedSpace(vpsTrackingOptions, roomOptions);
             }
             else if (Application.isEditor && !string.IsNullOrEmpty(_inEditorPayload))
             {
                 Debug.LogWarning("Skipping coverage selection in favor of provided payload.");
                 _vpsCoverageTargetListManager.gameObject.SetActive(false);
+                _panelToggle.CloseState(); // hide the panel for location search
+                _panelToggle.gameObject.SetActive(false);
                 OnLocationSelected(_inEditorPayload);
             }
         }
@@ -110,7 +117,6 @@ namespace  Niantic.Lightship.AR.Samples
             _vpsCoverageTargetListManager.gameObject.SetActive(false);
             _localizationStatusPanel.SetActive(true);
             _localizationStatusText.text = "NOT TRACKING";
-            Debug.Log("Location selected");
         }
 
         private void OnColocalizationTrackingStateChanged(SharedSpaceManager.SharedSpaceManagerStateChangeEventArgs args)
@@ -129,8 +135,9 @@ namespace  Niantic.Lightship.AR.Samples
             }
             else
             {
-                Debug.Log("ARLocation NOT TRACKING");
-                _localizationStatusText.text = "NOT TRACKING";
+                if(_localizationStatusText != null){
+                    _localizationStatusText.text = "NOT TRACKING";
+                }
             }
         }
 

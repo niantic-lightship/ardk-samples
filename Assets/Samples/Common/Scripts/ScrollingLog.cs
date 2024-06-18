@@ -1,4 +1,4 @@
-// Copyright 2022 Niantic, Inc. All Rights Reserved.
+// Copyright 2022-2024 Niantic.
 
 using System;
 using System.Collections.Generic;
@@ -64,6 +64,7 @@ namespace Niantic.ARDKExamples.Helpers
       var newLogEntry = Instantiate(LogEntryPrefab, Vector3.zero, Quaternion.identity);
       newLogEntry.text = str;
       newLogEntry.fontSize = LogEntryFontSize;
+      newLogEntry.color = Color.white;
 
       var transform = newLogEntry.transform;
       transform.SetParent(LogHistory.transform);

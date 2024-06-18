@@ -7,21 +7,24 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Samples/Home/Scenes/Home.unity
-    guid: 1bba4cece25a3458f8d2983b1cd85e83
+    guid: ca5e717807acf4f0eac815ac612d2331
   - enabled: 1
-    path: Assets/Samples/Depth/Scenes/DepthOcclusion.unity
-    guid: 0d0f8927903d84af3b21ddede8358fcc
+    path: Assets/Samples/Depth/Scenes/Occlusion.unity
+    guid: 331912c5e833c4a10a84546c00090b66
   - enabled: 1
     path: Assets/Samples/Depth/Scenes/DepthDisplay.unity
-    guid: a7c2694f3359d46a8acf408d66801c84
+    guid: 0316d7286c1fc4aa9b1a49cf74de428e
   - enabled: 1
-    path: Assets/Samples/GameBoard/Scenes/Gameboard.unity
+    path: Assets/Samples/NavigationMesh/Scenes/NavigationMesh.unity
     guid: a06c30b00ed554db68bfe3b791e59681
   - enabled: 1
     path: Assets/Samples/Meshing/Scenes/NormalMeshes.unity
     guid: 2c0c87824fb144caf906bc9617676a4a
   - enabled: 1
-    path: Assets/Samples/PersistentAR/Scenes/PersistentAR.unity
+    path: Assets/Samples/Meshing/Scenes/TexturedMesh.unity
+    guid: b2ac3f3f19a3241819ef559a6bb893cd
+  - enabled: 1
+    path: Assets/Samples/PersistentAR/Scenes/RemoteAuthoring.unity
     guid: cdd6a99ef030b43f78bb5b19cce5f58b
   - enabled: 1
     path: Assets/Samples/Semantics/Scenes/SemanticsDisplay.unity
@@ -38,8 +41,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Samples/Scanning/Scenes/Recording.unity
     guid: a8b815c6414994643b8e7a33e5b2ccf2
+  - enabled: 1
+    path: Assets/Samples/ObjectDetection/Scenes/ObjectDetection.unity
+    guid: 44d3900bd5e104354a9ec8cdd17db747
+  - enabled: 1
+    path: Assets/Samples/WPS/Scenes/CompassScene.unity
+    guid: f036d5120f667497d9097f9e60b22d7f
   m_configObjects:
     Niantic.Lightship.AR.LightshipSettings: {fileID: 11400000, guid: 05b0489c7d3114fe3b5a5321c06a66dd, type: 2}
+    Niantic.Lightship.AR.WPSSettings: {fileID: 11400000, guid: ee6baa83fec89444b99181fc1ccffc2a, type: 2}
+    Niantic.Lightship.AR.WorldPositioningSettings: {fileID: 11400000, guid: ee6baa83fec89444b99181fc1ccffc2a, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 0ba5772da672041b0b49b09b47e32b89, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: bfd7813fb960643da9fd42f1589db513, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 217d86e680eb34b97bb0bb2a6ec7bfac, type: 2}

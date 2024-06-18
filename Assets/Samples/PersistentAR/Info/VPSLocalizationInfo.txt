@@ -1,8 +1,8 @@
 In this example, we'll use the Coverage API to select a wayspot that you can localize to.
 
 <b>Instructions</b>
-Add your API key in the Lightship>Settings menu.
-(Remote) uncheck the <b>use current location </b> button and enter the lat long of the place you'd like to test.
+Add your API key in the Lightship > Settings menu.
+(Remote) uncheck the <b>use current location </b> button and enter the latitude longitude of the place you'd like to test.
 (Local) Set a radius and tap <b>Request Areas</b>
 Choose a wayspot and tap the <i>Localize</i> button.
 Physically go to the location you’ve chosen and point the camera towards it.

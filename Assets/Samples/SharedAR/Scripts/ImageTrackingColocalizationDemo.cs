@@ -1,4 +1,4 @@
-// Copyright 2023 Niantic, Inc. All Rights Reserved.
+// Copyright 2022-2024 Niantic.
 
 using System.Collections;
 using UnityEngine;
@@ -40,12 +40,15 @@ namespace Niantic.Lightship.AR.Samples
         [SerializeField]
         private Texture2D _targetImage;
 
+        [FormerlySerializedAs("_targetImageSize")]
         [SerializeField]
-        private float _targetImageSize;
+        private float _targetImageWidthInMeters;
 
         private string _roomName;
 
         private bool _startAsHost;
+        
+        private bool _shutDown;
 
         void Awake()
         {
@@ -64,10 +67,19 @@ namespace Niantic.Lightship.AR.Samples
             _roomNameDisplayText.gameObject.SetActive(false);
             _targetImageInstructionPanel.SetActive(false);
 
+            _roomNameInputField.onValueChanged.AddListener(OnPinValueChane);
+
+        }
+        
+        void OnDestroy()
+        {
+            ShutDown();
         }
 
-        private void OnDestroy()
+        public void ShutDown()
         {
+            if (_shutDown) return;
+            
             _sharedSpaceManager.sharedSpaceManagerStateChanged -= OnColocalizationTrackingStateChanged;
             if (NetworkManager.Singleton != null)
             {
@@ -78,6 +90,8 @@ namespace Niantic.Lightship.AR.Samples
                 NetworkManager.Singleton.Shutdown();
                 Destroy(NetworkManager.Singleton.gameObject);
             }
+
+            _shutDown = true;
         }
 
         private void OnColocalizationTrackingStateChanged(SharedSpaceManager.SharedSpaceManagerStateChangeEventArgs args)
@@ -90,7 +104,7 @@ namespace Niantic.Lightship.AR.Samples
 
                 // create an origin marker object and set under the sharedAR origin
                 Instantiate(_sharedRootMarkerPrefab,
-                    _sharedSpaceManager._sharedArOriginObject.transform, false);
+                    _sharedSpaceManager.SharedArOriginObject.transform, false);
 
                 // Start networking
                 if (_startAsHost)
@@ -111,7 +125,7 @@ namespace Niantic.Lightship.AR.Samples
         public void StartNewRoom()
         {
             var imageTrackingOptions = ISharedSpaceTrackingOptions.CreateImageTrackingOptions(
-                _targetImage, _targetImageSize);
+                _targetImage, _targetImageWidthInMeters);
 
             // generate a new room name 3 digit number
             int code = (int)Random.Range(0.0f, 999.0f);
@@ -127,7 +141,7 @@ namespace Niantic.Lightship.AR.Samples
         public void Join()
         {
             var imageTrackingOptions = ISharedSpaceTrackingOptions.CreateImageTrackingOptions(
-                _targetImage, _targetImageSize);
+                _targetImage, _targetImageWidthInMeters);
 
             //set room name from text box
             _roomName = _roomNameInputField.text;
@@ -177,6 +191,18 @@ namespace Niantic.Lightship.AR.Samples
                 // show the UI panel for ending
                 _endPanelText.text = "Disconnected from network";
                 _endPanel.SetActive(true);
+            }
+        }
+        //Enforce 10 character limit on room name
+        private void OnPinValueChane(string newPin)
+        {
+            if (newPin.Length > 6)
+            {
+                _roomNameInputField.text = newPin.Substring(0, 6);
+            }
+            else
+            {
+                _roomNameInputField.text = newPin;
             }
         }
 

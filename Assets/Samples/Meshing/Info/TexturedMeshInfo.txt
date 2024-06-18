@@ -1,0 +1,12 @@
+This scene generates a mesh of your surroundings and shows how to use Triplanar projection in a shader in order to texture the mesh.
+You can swap out the ceiling, ground and wall texture on the Triplanar material with any other texture you would like.
+e.g. grass, rocks and dirt in order to make the world look like a cave.
+
+Triplanar projection uses world space texture coordinates and allows you to tile a particular texture across the mesh.
+
+The sample also sets the meshing distance to 40 meters and the voxel size to 0.05m in order to demonstrate long range meshing.
+If you are using an iPhone Pro you will need to make sure you have turned off "prefer lidar if available" in order to see long distance meshing in action.
+
+<b>Instructions</b>:
+
+Just move your camera around, and you will see a mesh forming over everything in the scene.

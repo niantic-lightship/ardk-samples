@@ -1,6 +1,7 @@
-using System;
+// Copyright 2022-2024 Niantic.
 using Niantic.Lightship.AR.Loader;
-using Niantic.Lightship.AR.Subsystems;
+using Niantic.Lightship.AR.LocationAR;
+using Niantic.Lightship.AR.PersistentAnchors;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,10 +41,15 @@ namespace Niantic.Lightship.AR.Samples
 
                 return;
             }
+            if (_arLocationManager.ARLocations.Length <1)
+            {
+                _AnchorTrackingStateText.text = "Add an AR Location to the AR Location Manager.";
+                return;
+            }
 
             if (_AnchorTrackingStateText != null)
             {
-                _AnchorTrackingStateText.text = "Waiting for anchor tracking";
+                _AnchorTrackingStateText.text = "Select a Location to start tracking";
             }
         }
 

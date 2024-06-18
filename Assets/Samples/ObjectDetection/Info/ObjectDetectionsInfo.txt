@@ -1,0 +1,5 @@
+In this example, we use Lightship Object detection to identify objects that fit the <i>category</i> selected.
+
+Rectangles will be drawn surrounding objects in the camera that match the selected category.
+You can also modify the confidence threshold to calibrate the detection.
+Both the category dropdown selector and confidence threshold slider are in the settings menu.

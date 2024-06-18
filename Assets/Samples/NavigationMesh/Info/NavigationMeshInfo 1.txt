@@ -1,0 +1,6 @@
+this scene shows how we could use meshing to create a <i>"navigation mesh"</i>.
+
+<b>Instructions</b>:
+Move you phone pointing at your surroundings and wait for the navmesh spaces to show.
+Then tap on them to set a destination.
+The <i>"player" cube</i> will find a path along the navmesh to reach the selected destination.

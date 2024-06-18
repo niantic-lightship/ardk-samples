@@ -1,0 +1,3 @@
+This example demonstrates occlusion based on depth and implements Semantic Suppression & Mesh Stabilization to improve the visual quality of occlusions
+Move the camera around and see how the red cube gets occluded by real objects around you.
+To see the improvements in occlusion, use the Semantic Suppression and Mesh Stabilization toggles in the Settings Menu.

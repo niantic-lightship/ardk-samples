@@ -1,3 +1,4 @@
+// Copyright 2022-2024 Niantic.
 using System;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;

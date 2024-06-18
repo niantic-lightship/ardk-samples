@@ -1,3 +1,4 @@
+// Copyright 2022-2024 Niantic.
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,8 +17,7 @@ public class SceneSwitcher : MonoBehaviour, ISerializationCallbackReceiver
 
     [SerializeField] private bool _stopSubsystems;
 
-    private HashSet<string> PortraitScenes = new HashSet<string>() {"Home","SharedARVPS","PersistentAR", "VPSLocalization" };
-
+    private HashSet<string> PortraitScenes = new HashSet<string>() {"Home","RemoteAuthoring","CompassScene" };
     public void SwitchToScene()
     {
         OrientationPicker();
