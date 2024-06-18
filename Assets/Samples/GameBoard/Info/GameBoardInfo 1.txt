@@ -1,6 +1,0 @@
-this scene shows how we could use meshing to create a <i>"game board"</i>.
-
-<b>Instructions</b>:
-Move you phone pointing at your surroundings and wait for the gameboard spaces to show.
-Then tap on them to set a destination.
-The <i>"player" cube</i> will find a path along the gameboard to reach the selected destination.

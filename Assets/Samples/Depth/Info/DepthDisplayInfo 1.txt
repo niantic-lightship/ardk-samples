@@ -1,2 +1,0 @@
-In this example, we create and render a depth buffer from the phone's camera, visible on the top left.
-
