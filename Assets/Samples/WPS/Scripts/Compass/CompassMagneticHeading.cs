@@ -21,7 +21,7 @@ namespace WorldPoseSamples
 
         private void Update()
         {
-            if (Input.compass.enabled)
+            if (Input.compass.enabled && Input.location.status == LocationServiceStatus.Running)
             {
                 float heading = Input.compass.trueHeading;
                 _compassImage.rectTransform.rotation = Quaternion.Euler(0, 0, heading);

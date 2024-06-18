@@ -1,5 +1,5 @@
 # Lightship ARDK Samples
-This Unity package provides Sample Scenes with easy-to-understand examples for many of the Lightship ARDK 3.4 features.
+This Unity package provides Sample Scenes with easy-to-understand examples for many of the Lightship ARDK 3 features.
 
 ## __Quick links:__
 * [ARDK API Reference](https://lightship.dev/docs/ardk/apiref/Niantic/)

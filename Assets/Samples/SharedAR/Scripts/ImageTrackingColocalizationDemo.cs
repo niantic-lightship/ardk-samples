@@ -47,6 +47,8 @@ namespace Niantic.Lightship.AR.Samples
         private string _roomName;
 
         private bool _startAsHost;
+        
+        private bool _shutDown;
 
         void Awake()
         {
@@ -68,9 +70,16 @@ namespace Niantic.Lightship.AR.Samples
             _roomNameInputField.onValueChanged.AddListener(OnPinValueChane);
 
         }
-
-        private void OnDestroy()
+        
+        void OnDestroy()
         {
+            ShutDown();
+        }
+
+        public void ShutDown()
+        {
+            if (_shutDown) return;
+            
             _sharedSpaceManager.sharedSpaceManagerStateChanged -= OnColocalizationTrackingStateChanged;
             if (NetworkManager.Singleton != null)
             {
@@ -81,6 +90,8 @@ namespace Niantic.Lightship.AR.Samples
                 NetworkManager.Singleton.Shutdown();
                 Destroy(NetworkManager.Singleton.gameObject);
             }
+
+            _shutDown = true;
         }
 
         private void OnColocalizationTrackingStateChanged(SharedSpaceManager.SharedSpaceManagerStateChangeEventArgs args)

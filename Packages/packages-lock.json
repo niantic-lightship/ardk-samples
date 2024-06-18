@@ -1,40 +1,38 @@
 {
   "dependencies": {
     "com.nianticlabs.lightship": {
-      "version": "https://github.com/niantic-lightship/ardk-upm.git",
+      "version": "file:../../../ardk-next/unity/DevPackages/com.nianticlabs.lightship",
       "depth": 0,
-      "source": "git",
+      "source": "local",
       "dependencies": {
         "com.unity.editorcoroutines": "1.0.0",
-        "com.unity.xr.arfoundation": "5.1.0",
-        "com.unity.xr.arcore": "5.1.0",
-        "com.unity.xr.arkit": "5.1.0",
+        "com.unity.xr.arfoundation": "5.1.4",
+        "com.unity.xr.arcore": "5.1.4",
+        "com.unity.xr.arkit": "5.1.4",
         "com.unity.xr.openxr": "1.6.0",
         "com.unity.xr.core-utils": "2.1.0",
         "com.unity.xr.management": "4.0.1",
-        "com.unity.nuget.newtonsoft-json": "3.2.1"
-      },
-      "hash": "f646e81d91662fb9d20abcc28b167e2d17a87000"
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.unity.burst": "1.8.4"
+      }
     },
     "com.nianticlabs.lightship.sharedar": {
-      "version": "https://github.com/niantic-lightship/sharedar-upm.git",
+      "version": "file:../../../ardk-next/unity/DevPackages/com.nianticlabs.lightship.sharedar",
       "depth": 0,
-      "source": "git",
+      "source": "local",
       "dependencies": {
-        "com.nianticlabs.lightship": "3.5.0-2405101709",
+        "com.nianticlabs.lightship": "3.6.0",
         "com.unity.netcode.gameobjects": "1.2.0"
-      },
-      "hash": "d5a201f4daef3a354a46eca3bfd8e7ae7d2a67d4"
+      }
     },
     "com.nianticlabs.lightship.wps": {
-      "version": "https://github.com/niantic-lightship/wps-upm.git",
+      "version": "file:../../../ardk-next/unity/DevPackages/com.nianticlabs.lightship.wps",
       "depth": 0,
-      "source": "git",
+      "source": "local",
       "dependencies": {
-        "com.nianticlabs.lightship": "3.5.0-2405101709",
+        "com.nianticlabs.lightship": "3.6.0",
         "com.unity.xr.management": "4.0.1"
-      },
-      "hash": "701f1c65757e801411010eacb56a6f27937a53f3"
+      }
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -44,7 +42,7 @@
     },
     "com.unity.burst": {
       "version": "1.8.11",
-      "depth": 3,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1"
@@ -52,7 +50,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {
-      "version": "2.0.5",
+      "version": "2.3.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -83,7 +81,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.24",
+      "version": "3.0.28",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -124,7 +122,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.netcode.gameobjects": {
-      "version": "1.7.0",
+      "version": "1.8.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -180,7 +178,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.transport": {
-      "version": "1.4.0",
+      "version": "1.4.1",
       "depth": 2,
       "source": "registry",
       "dependencies": {
@@ -219,7 +217,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.visualscripting": {
-      "version": "1.9.1",
+      "version": "1.9.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -229,11 +227,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arcore": {
-      "version": "5.1.0",
+      "version": "5.1.4",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.xr.arfoundation": "5.1.0",
+        "com.unity.xr.arfoundation": "5.1.4",
         "com.unity.xr.core-utils": "2.1.0",
         "com.unity.xr.management": "4.0.1",
         "com.unity.modules.androidjni": "1.0.0",
@@ -242,7 +240,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arfoundation": {
-      "version": "5.1.0",
+      "version": "5.1.4",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -260,19 +258,19 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arkit": {
-      "version": "5.1.0",
+      "version": "5.1.4",
       "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.editorcoroutines": "1.0.0",
-        "com.unity.xr.arfoundation": "5.1.0",
+        "com.unity.xr.arfoundation": "5.1.4",
         "com.unity.xr.core-utils": "2.1.0",
         "com.unity.xr.management": "4.0.1"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.core-utils": {
-      "version": "2.2.3",
+      "version": "2.3.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -303,7 +301,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.openxr": {
-      "version": "1.9.1",
+      "version": "1.10.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {

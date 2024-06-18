@@ -22,7 +22,10 @@ public class SpriteToggler : MonoBehaviour
 
     private void Start()
     {
-        Selected = animatorState.Open;
+        if (animatorState)
+        {
+            Selected = animatorState.Open;
+        }
     }
     public void SpriteChange()
     {

@@ -1374,7 +1374,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enable Depth Visualizaiton
+  m_Text: Enable Depth Visualization
 --- !u!224 &1170670823266601305
 RectTransform:
   m_ObjectHideFlags: 0
