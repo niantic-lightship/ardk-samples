@@ -276,6 +276,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -885,6 +886,7 @@ MonoBehaviour:
   _useCustomBackgroundMaterial: 0
   _customBackgroundMaterial: {fileID: 0}
   _bypassOcclusionManagerUpdates: 0
+  _overrideOcclusionManagerSettings: 1
   _semanticSegmentationManager: {fileID: 0}
   _meshManager: {fileID: 0}
 --- !u!1 &1803694357
