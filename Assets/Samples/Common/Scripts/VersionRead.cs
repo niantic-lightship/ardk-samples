@@ -9,7 +9,7 @@ public class VersionRead : MonoBehaviour
     [SerializeField]
     private Text uiTextBox;
 
-    private const string SamplesVersion = "3.7.0";
+    private const string SamplesVersion = "3.8.0";
 
     void Awake(){
         Screen.orientation = ScreenOrientation.Portrait;
