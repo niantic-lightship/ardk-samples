@@ -199,6 +199,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -289,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetFrameRate: 10
+  _fuseKeyframesOnly: 0
   _maximumIntegrationDistance: 5
   _voxelSize: 0.025
   _enableDistanceBasedVolumetricCleanup: 1
@@ -296,10 +298,13 @@ MonoBehaviour:
   _meshCullingDistance: 0
   _enableMeshDecimation: 1
   _isMeshFilteringEnabled: 1
+  _semanticSegmentationManager: {fileID: 1856749851}
   _isFilteringAllowListEnabled: 0
   _allowList: []
   _isFilteringBlockListEnabled: 0
   _blockList: []
+  _enableLevelsOfDetail: 0
+  _levelsOfDetail: 1
 --- !u!114 &407273226 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2839590003489950084, guid: 80dc80543fb024a88be15bdfcba0a99b, type: 3}

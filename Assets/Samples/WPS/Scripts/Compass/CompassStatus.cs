@@ -1,6 +1,7 @@
 // Copyright 2023-2024 Niantic.
 
-using Niantic.Experimental.Lightship.AR.WorldPositioning;
+using Niantic.Lightship.AR.WorldPositioning;
+
 using UnityEngine;
 
 public class CompassStatus : MonoBehaviour

@@ -1,8 +1,7 @@
 // Copyright 2023-2024 Niantic.
 
-using System;
-using System.Xml.Serialization;
-using Niantic.Experimental.Lightship.AR.WorldPositioning;
+using Niantic.Lightship.AR.WorldPositioning;
+
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 

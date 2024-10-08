@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using Niantic.Lightship.AR.LocationAR;
 using Niantic.Lightship.AR.PersistentAnchors;
+using Niantic.Lightship.AR.Samples;
 using Niantic.Lightship.AR.Subsystems;
 
 using UnityEngine;
@@ -32,6 +33,9 @@ public class VPSLocalizeDemo : MonoBehaviour
     [SerializeField]
     private Toggle _downloadMeshToggle;
 
+    [SerializeField]
+    private LocalizationGuidanceManager _localizationGuidanceManager;
+
     //Holder object for the AR location payload.
     private GameObject _arLocationHolder;
     
@@ -58,6 +62,7 @@ public class VPSLocalizeDemo : MonoBehaviour
     private void OnDestroy()
     {
         _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed -= OnLocationSelected;
+        _localizationGuidanceManager.StopGuidance();
         if (_arLocationHolder != null)
         {
             Destroy(_arLocationHolder);
@@ -102,6 +107,7 @@ public class VPSLocalizeDemo : MonoBehaviour
         _vpsCoverageTargetListManager.gameObject.SetActive(false);
         _localizationStatusText.text = "NOT TRACKING";
         _localizationStatusPanel.SetActive(true);
+        _localizationGuidanceManager.StartGuidance();
     }
 
     private void OnLocationTrackingStateChanged(ARLocationTrackedEventArgs args)
@@ -110,6 +116,7 @@ public class VPSLocalizeDemo : MonoBehaviour
          {
             _localizationStatusText.text = "TRACKING";
             _isTracking = true;
+            _localizationGuidanceManager.StopGuidance();
             if (!_meshDownloadStarted && _downloadMeshToggle.isOn)
             {
                 _meshDownloadStarted = true;

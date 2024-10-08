@@ -2,9 +2,11 @@
 
 using System.Collections;
 using System.Collections.Generic;
+
+using Niantic.Lightship.AR.WorldPositioning;
+using Niantic.Lightship.AR.XRSubsystems;
+
 using UnityEngine;
-using Niantic.Experimental.Lightship.AR.WorldPositioning;
-using Niantic.Experimental.Lightship.AR.XRSubsystems;
 
 public class StatusHelper : MonoBehaviour
 {
