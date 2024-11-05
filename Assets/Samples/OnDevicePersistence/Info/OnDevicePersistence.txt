@@ -1,0 +1,4 @@
+Create and anchor content to the world at any location using Adhoc Maps.
+The local map can then be used to anchor any content at any location.
+The demo allows the user to place cubes that are anchored to the map they have created.
+The data is stored to files on your device meaning you can now save and share local maps and content!

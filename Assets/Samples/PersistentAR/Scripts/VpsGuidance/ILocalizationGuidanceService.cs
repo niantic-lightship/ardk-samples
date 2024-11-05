@@ -1,4 +1,4 @@
-// Copyright 2022-2024 Niantic.
+// Copyright 2022-${CurrentDate.Year} Niantic.
 
 using System;
 
