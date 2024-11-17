@@ -132,10 +132,11 @@ namespace Niantic.Lightship.AR.Samples
             _roomName = code.ToString("D3");
             var roomOptions = SetupRoomAndUI();
 
-            _sharedSpaceManager.StartSharedSpace(imageTrackingOptions, roomOptions);
-
             // start as host
             _startAsHost = true;
+
+            _sharedSpaceManager.StartSharedSpace(imageTrackingOptions, roomOptions);
+            
         }
 
         public void Join()
@@ -147,10 +148,11 @@ namespace Niantic.Lightship.AR.Samples
             _roomName = _roomNameInputField.text;
             var roomOptions = SetupRoomAndUI();
 
-            _sharedSpaceManager.StartSharedSpace(imageTrackingOptions, roomOptions);
-
             // start as client
             _startAsHost = false;
+
+            _sharedSpaceManager.StartSharedSpace(imageTrackingOptions, roomOptions);
+            
         }
 
         private ISharedSpaceRoomOptions SetupRoomAndUI()
