@@ -11,25 +11,34 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7abc3dbfe57c4ad49b19309f187d9e1a, type: 3}
   m_Name: Lightship Settings
-  m_EditorClassIdentifier:
-  _apiKey:
+  m_EditorClassIdentifier: 
+  _apiKey: 
   _useLightshipDepth: 1
-  _useLightshipMeshing: 1
   _preferLidarIfAvailable: 1
-  _lightshipDepthFrameRate: 20
-  _useLightshipPersistentAnchor: 1
+  _useLightshipMeshing: 1
   _useLightshipSemanticSegmentation: 1
-  _LightshipSemanticSegmentationFrameRate: 10
   _useLightshipScanning: 1
-  _editorPlaybackSettings:
-    _usePlayback: 0
-    _playbackDatasetPath:
-    _runPlaybackManually: 0
-    _loopInfinitely: 0
-    _numberOfIterations: 1
+  _useLightshipPersistentAnchor: 1
+  _useLightshipObjectDetection: 1
+  _useLightshipWorldPositioning: 1
+  _unityLogLevel: 3
+  _fileLogLevel: 5
+  _stdoutLogLevel: 5
+  _lightshipSimulationParams:
+    _useZBufferDepth: 1
+    _useSimulationPersistentAnchor: 1
+    _simulationPersistentAnchorParams:
+      m_minimumAnchorDiscoveryTimeSeconds: 1
+      m_maximumAnchorDiscoveryTimeSeconds: 2
+      m_applyTranslationalOffset: 0
+      m_translationalOffsetSeverityMeters: 0.05
+      m_applyRotationalOffset: 0
+      m_rotationalOffsetSeverityDegrees: 1
+      m_surfaceAnchorFailure: 0
+      m_trackingStateReason: 0
   _devicePlaybackSettings:
     _usePlayback: 0
-    _playbackDatasetPath:
+    _playbackDatasetPath: 
     _runPlaybackManually: 0
     _loopInfinitely: 0
     _numberOfIterations: 1

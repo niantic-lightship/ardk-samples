@@ -47,6 +47,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Samples/WPS/Scenes/CompassScene.unity
     guid: f036d5120f667497d9097f9e60b22d7f
+  - enabled: 1
+    path: Assets/Samples/OnDevicePersistence/Scenes/OnDevicePersistence.unity
+    guid: b09618836d6b14bbcbb672ed5ca8547f
   m_configObjects:
     Niantic.Lightship.AR.LightshipSettings: {fileID: 11400000, guid: 05b0489c7d3114fe3b5a5321c06a66dd, type: 2}
     Niantic.Lightship.AR.WPSSettings: {fileID: 11400000, guid: ee6baa83fec89444b99181fc1ccffc2a, type: 2}
