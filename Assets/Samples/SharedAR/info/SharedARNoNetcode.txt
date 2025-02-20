@@ -1,0 +1,11 @@
+With this sample you can create a shared AR experience at any of our Niantic Wayspots -- without using Unity's Netcode solution.
+
+<b>Instructions</b>:
+Add your API key in the Lightship > Settings menu.
+(Editor) Assign the playback dataset for the desired Wayspot in Project Settings->Niantic Lightship SDK
+
+* Enter your user name in the text field
+* Set a radius and tap <b>Search</b>
+* Choose a wayspot and tap the <i>Localize</i> button.
+* Physically go to the location you’ve chosen and point the camera at the location in the hint image.
+* After a few seconds you should connect to the network and see any other connected peers.

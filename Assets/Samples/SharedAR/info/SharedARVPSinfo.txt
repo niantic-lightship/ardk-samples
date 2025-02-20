@@ -10,3 +10,4 @@ Physically go to the location you’ve chosen and point the camera towards it.
 After a few seconds you should see the "Tracking" message and two buttons appear.
 Select Host (first) or client.
 On the host device you should see data come in about the peers in the session.
+Press Exit to go back to initial state.

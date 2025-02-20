@@ -1,0 +1,20 @@
+With this sample you can create a shared AR experience using Device Mapping.
+
+<b>Instructions</b>:
+Add your API key in the Lightship > Settings menu before building the app.
+
+* Make sure all the players are in the same space.
+* Enter the room name in the text field.
+
+<b>(Host)</b>
+* Press "Join As Host"
+* Press "Start Map Scan" to start scanning a device mapping, then click "Stop Map Scan" to stop and create the map. The map will be automatically shared to clients if exist.
+* Tracking State changed into "Tracking" means you are localized using the map and you will see other localized players icon.
+
+<b>(Client)</b>
+* Click "Join As Client"
+* The map will be shared from the Host if it's ready.
+
+
+* Tracking State changed into "Tracking" means you are localized using the map and you will see other localized players icon.
+* Press "Exit" to go back to the initial state. 

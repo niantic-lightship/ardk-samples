@@ -131,13 +131,9 @@ namespace Niantic.Lightship.AR.Samples
 
             if (OwnerClientId == NetworkManager.ServerClientId)
             {
-                Debug.Log("Host disconnected!!");
-                if (VpsColocalizationDemo.Instance)
+                if (ImageTrackingColocalizationDemo.Instance)
                 {
-                    VpsColocalizationDemo.Instance.HandleHostDisconnected();
-                }
-                else if (ImageTrackingColocalizationDemo.Instance)
-                {
+                    Debug.Log("Host disconnected!!");
                     ImageTrackingColocalizationDemo.Instance.HandleHostDisconnected();
                 }
             }

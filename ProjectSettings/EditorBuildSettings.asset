@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Samples/Meshing/Scenes/NormalMeshes.unity
     guid: 2c0c87824fb144caf906bc9617676a4a
   - enabled: 1
-    path: Assets/Samples/Meshing/Scenes/TexturedMesh.unity
+    path: Assets/Samples/Meshing/Scenes/TriplanarMesh.unity
     guid: b2ac3f3f19a3241819ef559a6bb893cd
   - enabled: 1
     path: Assets/Samples/PersistentAR/Scenes/RemoteAuthoring.unity
@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Samples/SharedAR/Scenes/SharedARVPS.unity
     guid: 5e2255d8c3c944f5b9830e69be55f728
+  - enabled: 1
+    path: Assets/Samples/SharedAR/Scenes/SharedARNoNetcode.unity
+    guid: db713206c2bb940d7b0d94b84f22503f
   - enabled: 1
     path: Assets/Samples/SharedAR/Scenes/ImageTrackingColocalization.unity
     guid: 41a110b1790a049f491907b95e423d6e

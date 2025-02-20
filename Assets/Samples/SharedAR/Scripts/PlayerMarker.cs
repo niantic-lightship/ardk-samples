@@ -34,10 +34,6 @@ namespace Scenes.SharedAR.VpsColocalization
             if (OwnerClientId == NetworkManager.ServerClientId)
             {
                 Debug.Log("Host disconnected!!");
-                if (VpsColocalizationDemo.Instance)
-                {
-                    VpsColocalizationDemo.Instance.HandleHostDisconnected();
-                }
             }
             base.OnNetworkDespawn();
         }

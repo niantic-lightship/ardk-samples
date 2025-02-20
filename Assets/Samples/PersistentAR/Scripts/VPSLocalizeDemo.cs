@@ -79,9 +79,9 @@ public class VPSLocalizeDemo : MonoBehaviour
         }
     }
 
-    private void OnLocationSelected(String defaultPayloadToSet)
+    private void OnLocationSelected(VpsCoverageTargetListManager.WayspotSelectedArgs location)
     {
-        if (String.IsNullOrEmpty(defaultPayloadToSet))
+        if (String.IsNullOrEmpty(location.Payload))
         {
             Debug.LogWarning("The selected location does not have a default anchor");
             return;
@@ -100,7 +100,7 @@ public class VPSLocalizeDemo : MonoBehaviour
         }
 
         //Once it is setup, we assign the payload and start tracking the ARLocation.
-        _arLocation.Payload = new ARPersistentAnchorPayload(defaultPayloadToSet);
+        _arLocation.Payload = new ARPersistentAnchorPayload(location.Payload);
         _arLocationManager.SetARLocations(_arLocation);
         _arLocationManager.StartTracking();
 

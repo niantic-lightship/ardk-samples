@@ -44,6 +44,12 @@ public class Mapper : MonoBehaviour
     //you can easily modify the code have a start and stop button if you prefer
     private IEnumerator RunMapping(float seconds)
     {
+        // Reset the ARDeviceMappingManager
+        _deviceMappingManager.gameObject.SetActive(false);
+        yield return null;
+        _deviceMappingManager.gameObject.SetActive(true);
+        yield return null;
+        //
         _mappingInProgress = true;
         _deviceMappingManager.SetDeviceMap(new ARDeviceMap());
         _deviceMappingManager.StartMapping();
@@ -61,7 +67,6 @@ public class Mapper : MonoBehaviour
             _deviceMappingManager.DeviceMapFinalized -= OnDeviceMapFinalized;
             _deviceMappingManager.StopMapping();
             _mappingInProgress = false;
-           
         }
     }
 

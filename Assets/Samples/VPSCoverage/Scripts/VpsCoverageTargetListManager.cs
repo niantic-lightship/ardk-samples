@@ -17,6 +17,12 @@ public class VpsCoverageTargetListManager : MonoBehaviour
         AppleMaps
     }
 
+    public struct WayspotSelectedArgs
+    {
+        public string Payload;
+        public string Name;
+    }
+    
     [SerializeField] [Tooltip("Select the app to show directions")]
     private MapApp _mapApp = MapApp.GoogleMaps;
 
@@ -61,7 +67,7 @@ public class VpsCoverageTargetListManager : MonoBehaviour
     [SerializeField]
     private CoverageClientManager _coverageClientManager;
 
-    public event Action<string> OnWayspotDefaultAnchorButtonPressed;
+    public event Action<WayspotSelectedArgs> OnWayspotDefaultAnchorButtonPressed;
 
     private readonly List<VpsCoverageTargetListItem> _targetListItemInstances = new();
     private GameObject _scrollListContent;
@@ -103,6 +109,12 @@ public class VpsCoverageTargetListManager : MonoBehaviour
         _scrollList.gameObject.SetActive(true);
     }
 
+    public void CloseList()
+    {
+        ClearListContent();
+        _scrollList.gameObject.SetActive(false);
+    }
+    
     /// <summary>
     /// Clears list, Gets result from coverage around the selected location and sorts it to be presentable.
     /// </summary>
@@ -252,7 +264,7 @@ public class VpsCoverageTargetListManager : MonoBehaviour
 
         coverageTargetListItem.SubscribeToCopyButton(() =>
         {
-            OnWayspotDefaultAnchorButtonPressed?.Invoke(target.DefaultAnchor);
+            OnWayspotDefaultAnchorButtonPressed?.Invoke(new WayspotSelectedArgs{ Payload = target.DefaultAnchor, Name = target.Name });
             GUIUtility.systemCopyBuffer = target.DefaultAnchor;
         });
     }
