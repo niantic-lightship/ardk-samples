@@ -4,7 +4,6 @@ This Unity package provides Sample Scenes with easy-to-understand examples for m
 ## __Quick links:__
 * [ARDK API Reference](https://lightship.dev/docs/ardk/apiref/Niantic/)
 * [Documentation](https://lightship.dev/docs/ardk/sample_projects/)
-* [Discord](https://discord.gg/uqfnAWVy)
 * [Forums](https://community.lightship.dev/)
 
 # Getting Started
