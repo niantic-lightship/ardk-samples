@@ -1,3 +1,4 @@
+// Copyright 2022-2025 Niantic.
 #if UNITY_IOS && UNITY_EDITOR_OSX
 using System.IO;
 using UnityEditor;

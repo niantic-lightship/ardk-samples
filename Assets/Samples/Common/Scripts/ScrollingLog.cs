@@ -1,4 +1,4 @@
-// Copyright 2022-2024 Niantic.
+// Copyright 2022-2025 Niantic.
 
 using System;
 using System.Collections.Generic;

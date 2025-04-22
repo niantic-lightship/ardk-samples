@@ -1,3 +1,4 @@
+// Copyright 2022-2025 Niantic.
 using System;
 using System.Collections;
 using System.IO;
@@ -15,6 +16,9 @@ public class Mapper : MonoBehaviour
 
     //subscribe to this to know mapping has completed
     public Action<bool> _onMappingComplete;
+
+    //if we want the map to be written to the device or not.
+    public bool _saveToFile = true;
     
     void Start()
     {
@@ -35,6 +39,11 @@ public class Mapper : MonoBehaviour
         currentCo = StartCoroutine(RunMapping(seconds));
     }
 
+    public ARDeviceMap GetMap()
+    {
+        return _deviceMappingManager.ARDeviceMap;
+    }
+
     private void OnDestroy()
     {
         _deviceMappingManager.DeviceMapFinalized -= OnDeviceMapFinalized;
@@ -45,14 +54,16 @@ public class Mapper : MonoBehaviour
     private IEnumerator RunMapping(float seconds)
     {
         // Reset the ARDeviceMappingManager
-        _deviceMappingManager.gameObject.SetActive(false);
+        _deviceMappingManager.enabled = false;
         yield return null;
-        _deviceMappingManager.gameObject.SetActive(true);
+        _deviceMappingManager.enabled = true;
         yield return null;
-        //
+        //start mapping
         _mappingInProgress = true;
         _deviceMappingManager.SetDeviceMap(new ARDeviceMap());
         _deviceMappingManager.StartMapping();
+        
+        //end mapping after a few seconds
         yield return new WaitForSeconds(seconds);
         _deviceMappingManager.StopMapping();
         _mappingInProgress = false;
@@ -70,25 +81,34 @@ public class Mapper : MonoBehaviour
         }
     }
 
+    
+    public void ClearAllState()
+    {
+        StopMapping();
+        _deviceMappingManager.enabled = false;
+        _deviceMappingManager.DeviceMapAccessController.ClearDeviceMap();
+    }
+
     private void OnDeviceMapFinalized(ARDeviceMap map)
     {
         _deviceMappingManager.DeviceMapFinalized -= OnDeviceMapFinalized;
         
         bool success = false;
-       
+        
         //if a map was created save it to a file
         if (map.HasValidMap())
         {
-            // map update. save as a new map to the file system
-            var fileName = OnDevicePersistence.k_mapFileName;
-            var serializedDeviceMap = map.Serialize();
-            var path = Path.Combine(Application.persistentDataPath, fileName);
-            File.WriteAllBytes(path, serializedDeviceMap);
             success = true;
+            if (_saveToFile == true)
+            {
+                // map update. save as a new map to the file system
+                var fileName = OnDevicePersistence.k_mapFileName;
+                var serializedDeviceMap = map.Serialize();
+                var path = Path.Combine(Application.persistentDataPath, fileName);
+                File.WriteAllBytes(path, serializedDeviceMap);
+               
+            }
         }
-
         _onMappingComplete?.Invoke(success);
-      
-        
     }
 }

@@ -1,4 +1,4 @@
-// Copyright 2022-2024 Niantic.
+// Copyright 2022-2025 Niantic.
 
 using System;
 using System.Collections;
@@ -144,12 +144,7 @@ namespace  Niantic.Lightship.AR.Samples
         {
             _sharedSpaceManager.DestroySharedArOrigin();
             // Stop Tracking and this will destroy the anchor
-
-            // Stop tracking if it has started
-            if (_LastTrackingState)
-            {
-                LocationManager.StopTracking();
-            }
+            LocationManager.StopTracking();
 
             _sharedSpaceManager.sharedSpaceManagerStateChanged -= OnColocalizationTrackingStateChanged;
             _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed -= OnLocationSelected;
@@ -263,8 +258,18 @@ namespace  Niantic.Lightship.AR.Samples
         public void OnExitClicked()
         {
             Debug.Log("Exit clicked");
+            _exitButton.gameObject.SetActive(false);
+            
             // Leave room first to invoke the network disconnection event
-            _sharedSpaceManager.LeaveRoom();
+            if (NetworkManager.Singleton.IsConnectedClient)
+            {
+                _sharedSpaceManager.LeaveRoom();
+            }
+            // if user wants to exit before connected to the room, then 
+            else
+            {
+                RestartSession();
+            }
         }
         
         private void RestartSession()

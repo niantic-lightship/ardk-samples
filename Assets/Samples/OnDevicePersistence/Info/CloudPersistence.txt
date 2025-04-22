@@ -1,0 +1,5 @@
+This is a Adhoc multiplayer demo that leverages Device Maps, the datastore and Niantic's native networking.
+It shows how to create, persist and sync content across multiple clients.
+Press Create to make a network room, others can join that room if they use the same name.
+Users can place cubes. The cubes will sync across all clients and persist.
+Rooms are cleaned up in a few weeks.

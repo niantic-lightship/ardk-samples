@@ -1,3 +1,4 @@
+// Copyright 2022-2025 Niantic.
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;

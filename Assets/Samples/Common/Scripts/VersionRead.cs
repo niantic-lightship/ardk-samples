@@ -1,4 +1,4 @@
-// Copyright 2022-2024 Niantic.
+// Copyright 2022-2025 Niantic.
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +9,7 @@ public class VersionRead : MonoBehaviour
     [SerializeField]
     private Text uiTextBox;
 
-    private const string SamplesVersion = "3.12.0";
+    private const string SamplesVersion = "3.13.0";
 
     void Awake(){
         Screen.orientation = ScreenOrientation.Portrait;

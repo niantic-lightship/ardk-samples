@@ -1,4 +1,4 @@
-// Copyright 2022-2024 Niantic.
+// Copyright 2022-2025 Niantic.
 using System;
 using System.Collections;
 using System.Linq;
@@ -23,6 +23,11 @@ namespace Niantic.Lightship.AR.Samples
         [Range(1, 30)]
         [SerializeField]
         private int _scanRecordingFramerate = 30;
+        
+        [Tooltip("Max recording time (sec) per one chunk")]
+        [Range(30, 600)]
+        [SerializeField]
+        private float _maxTimePerChunk = 600;
         
         [Tooltip("The manager used to render the device camera feed")]
         [SerializeField]
@@ -163,7 +168,8 @@ namespace Niantic.Lightship.AR.Samples
             _performScanPanel.SetActive(false);
             _saveScanPanel.SetActive(false);
             _exportScanPanel.SetActive(true);
-            using var exportPayloadBuilder = new ScanArchiveBuilder(_savedScan, new UploadUserInfo());
+            int maxFramesPerChunk = (int)(_maxTimePerChunk * _scanRecordingFramerate);
+            using var exportPayloadBuilder = new ScanArchiveBuilder(_savedScan, new UploadUserInfo(), maxFramesPerChunk);
             _exportScanPanelTitleText.text = "Exporting...";
             string message = string.Empty;
             while (exportPayloadBuilder.HasMoreChunks())
