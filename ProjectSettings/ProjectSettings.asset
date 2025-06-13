@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: nianticlabs
-  productName: ar.ardksamples
+  companyName: nianticspatial
+  productName: ardk.ardksamples
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -140,7 +140,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 3.13.0
+  bundleVersion: 3.14.0
   preloadedAssets:
   - {fileID: 4800000, guid: b02d09082cbc14569ae46c12d9836abc, type: 3}
   - {fileID: 4800000, guid: f40a6c94c8e1b494d93d434ae522a14f, type: 3}
@@ -166,9 +166,9 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.nianticlabs.ar.ardksamples
-    Standalone: com.nianticlabs.ar.ardksamples
-    iPhone: com.nianticlabs.ar.ardksamples
+    Android: com.nianticspatial.ardk.ardksamples
+    Standalone: com.nianticspatial.ardk.ardksamples
+    iPhone: com.nianticspatial.ardk.ardksamples
   buildNumber:
     Standalone: 0
     VisionOS: 0

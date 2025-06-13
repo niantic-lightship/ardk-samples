@@ -24,8 +24,8 @@ public class PostBuildProcess : MonoBehaviour
         var plist = new PlistDocument();
         plist.ReadFromString(File.ReadAllText(plistPath));
         var rootDict = plist.root;
-        rootDict.SetString("UIFileSharingEnabled", "YES");
-        rootDict.SetString("LSSupportsOpeningDocumentsInPlace", "YES");
+        rootDict.SetBoolean("UIFileSharingEnabled", true);
+        rootDict.SetBoolean("LSSupportsOpeningDocumentsInPlace", true);
         File.WriteAllText(plistPath, plist.WriteToString());
     }
 }

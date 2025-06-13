@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RrequestMenuToggler : MonoBehaviour
+public class RequestMenuToggler : MonoBehaviour
 {
     [SerializeField]
     private AnimationToggle LogState;
@@ -12,20 +12,21 @@ public class RrequestMenuToggler : MonoBehaviour
     [SerializeField]
     private AnimationToggle SettingsState;
 
-    private bool requested;
-
-    private void Start()
+    private bool _requested;
+    
+    public void PreLocalization()
     {
-        requested = false;
+        _requested = false;
     }
+    
     public void PastLocalization()
     {
-        requested = true;
+        _requested = true;
     }
 
     public void ToggleState()
     {
-        if(!LogState.Open && !HelpState.Open && !requested)
+        if(!LogState.Open && !HelpState.Open && !_requested)
         {
             SettingsState.OpenState();
         }

@@ -324,6 +324,18 @@ MonoBehaviour:
           m_StringArgument: OnJoinAsClientClicked
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1060619798}
+        m_TargetAssemblyTypeName: RrequestMenuToggler, Assembly-CSharp
+        m_MethodName: PreLocalization
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &235413414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1371,6 +1383,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd22d1599cd9431ba59d2fd96b09cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1060619798 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7413958228709643644, guid: 2985388ab93434d16858614507aaabb7, type: 3}
+  m_PrefabInstance: {fileID: 290406292}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e55c199e231d8436da7707eb675c21de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1086481042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,7 +2192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vpsCoverageTargetListManager: {fileID: 126578620}
-  _panelToggle: {fileID: 1060619796}
+  _panelToggle: {fileID: 1060619798}
   _sharedSpaceManager: {fileID: 1860063806}
   _netButtonsPanel: {fileID: 1041100441}
   _joinButtons: {fileID: 1086481042}

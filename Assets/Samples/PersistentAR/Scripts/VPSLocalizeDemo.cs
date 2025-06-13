@@ -62,6 +62,7 @@ public class VPSLocalizeDemo : MonoBehaviour
     private void OnDestroy()
     {
         _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed -= OnLocationSelected;
+        _arLocationManager.locationTrackingStateChanged -= OnLocationTrackingStateChanged;
         _localizationGuidanceManager.StopGuidance();
         if (_arLocationHolder != null)
         {

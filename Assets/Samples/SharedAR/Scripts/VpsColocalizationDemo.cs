@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using Niantic.Lightship.SharedAR.Colocalization;
 using Unity.Netcode;
 using Niantic.Lightship.SharedAR.Netcode;
+using Unity.VisualScripting;
 using UnityEngine.Networking;
 using NetworkTransport = Unity.Netcode.NetworkTransport;
 
@@ -36,7 +37,7 @@ namespace  Niantic.Lightship.AR.Samples
         private VpsCoverageTargetListManager _vpsCoverageTargetListManager;
 
         [SerializeField]
-        private AnimationToggle _panelToggle;
+        private RequestMenuToggler _panelToggle;
 
         [SerializeField]
         private SharedSpaceManager _sharedSpaceManager;
@@ -96,6 +97,7 @@ namespace  Niantic.Lightship.AR.Samples
             }
             
             InitializeScene();
+            _localizationStatusText.text = "NOT TRACKING";
         }
 
         private void InitializeScene()
@@ -106,7 +108,11 @@ namespace  Niantic.Lightship.AR.Samples
             Debug.Log("Starting SharedAR with VPS");
             _LastTrackingState = false;
             _vpsCoverageTargetListManager.gameObject.SetActive(true);
-            _panelToggle.OpenState();
+
+            //Reset UI panels.
+            _panelToggle.PreLocalization();
+            _panelToggle.ToggleState();
+            
             _netButtonsPanel.SetActive(false);
             _joinButtons.SetActive(true);
             _exitButton.gameObject.SetActive(false);
@@ -116,7 +122,9 @@ namespace  Niantic.Lightship.AR.Samples
             {                
                 // Hide coverage list panel and show connction button
                 _vpsCoverageTargetListManager.gameObject.SetActive(false);
-                _panelToggle.CloseState(); // hide the panel for location search
+                // Hide the panel for location search
+                _panelToggle.PastLocalization();
+                _panelToggle.ToggleState();
                 // Set room to connect
                 var vpsTrackingOptions = ISharedSpaceTrackingOptions.CreateMockTrackingOptions();
                 var roomOptions = ISharedSpaceRoomOptions.CreateLightshipRoomOptions(
@@ -133,7 +141,8 @@ namespace  Niantic.Lightship.AR.Samples
         {
             Debug.LogWarning("Skipping coverage selection in favor of provided payload.");
             _vpsCoverageTargetListManager.gameObject.SetActive(false);
-            _panelToggle.CloseState(); // hide the panel for location search
+            _panelToggle.PastLocalization();
+            _panelToggle.ToggleState(); // hide the panel for location search
             _panelToggle.gameObject.SetActive(false);
             // Add some wait here, or initializing SharedAR networking might fail in editor because this is called immediately after networking was shutdown.
             yield return new WaitForSeconds(0.2f);
@@ -144,7 +153,9 @@ namespace  Niantic.Lightship.AR.Samples
         {
             _sharedSpaceManager.DestroySharedArOrigin();
             // Stop Tracking and this will destroy the anchor
-            LocationManager.StopTracking();
+            if (!LocationManager.IsUnityNull()){
+                LocationManager.StopTracking();
+            }
 
             _sharedSpaceManager.sharedSpaceManagerStateChanged -= OnColocalizationTrackingStateChanged;
             _vpsCoverageTargetListManager.OnWayspotDefaultAnchorButtonPressed -= OnLocationSelected;
@@ -183,7 +194,6 @@ namespace  Niantic.Lightship.AR.Samples
             _vpsCoverageTargetListManager.gameObject.SetActive(false);
             _vpsCoverageTargetListManager.CloseList();
             _localizationStatusPanel.SetActive(true);
-            _localizationStatusText.text = "NOT TRACKING";
         }
         
         private void OnServerStarted()
