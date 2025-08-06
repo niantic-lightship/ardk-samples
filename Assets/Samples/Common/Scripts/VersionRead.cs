@@ -6,10 +6,9 @@ using UnityEngine.UI;
 public class VersionRead : MonoBehaviour
 {
 
-    [SerializeField]
-    private Text uiTextBox;
+    public Text uiTextBox;
 
-    private const string SamplesVersion = "3.14.0";
+    private const string SamplesVersion = "3.15.0-2508040839";
 
     void Awake(){
         Screen.orientation = ScreenOrientation.Portrait;
@@ -19,8 +18,8 @@ public class VersionRead : MonoBehaviour
     void Start()
     {
         
-        uiTextBox.text = "ARDK: " + Niantic.Lightship.AR.Settings.Metadata.Version +
-            "\n" + "Shared AR: " + Niantic.Lightship.SharedAR.Settings.Metadata.SharedArVersion +
+        uiTextBox.text = "SDK: " + Niantic.Lightship.AR.Settings.Metadata.Version +
+            "\n" + "Shared: " + Niantic.Lightship.SharedAR.Settings.Metadata.SharedArVersion +
             "\n" + "Samples: " + SamplesVersion;
     }
 

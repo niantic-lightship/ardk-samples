@@ -1,10 +1,12 @@
 // Copyright 2022-2025 Niantic.
 using System;
 using System.Collections;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Niantic.ARDK.AR.Scanning;
 using Niantic.Lightship.AR.Scanning;
+using Unity.SharpZipLib.Utils;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.Video;
@@ -19,15 +21,21 @@ namespace Niantic.Lightship.AR.Samples
         [SerializeField]
         private ARScanningManager _arScanningManager;
         
-        [Tooltip("Framerate at which the scan is recorded")]
-        [Range(1, 30)]
+        [Tooltip("Slider to set framerate")]
         [SerializeField]
-        private int _scanRecordingFramerate = 30;
-        
-        [Tooltip("Max recording time (sec) per one chunk")]
-        [Range(30, 600)]
+        private Slider _framerateSlider;
+
+        [Tooltip("Text of current framerate")]
         [SerializeField]
-        private float _maxTimePerChunk = 600;
+        private Text _framerateText;
+
+        [Tooltip("Slider to set max recording time per file")]
+        [SerializeField]
+        private Slider _maxTimePerChunkSlider;
+
+        [Tooltip("Text of current max recording time per file")]
+        [SerializeField]
+        private Text _maxTimePerChunkText;
         
         [Tooltip("The manager used to render the device camera feed")]
         [SerializeField]
@@ -60,6 +68,14 @@ namespace Niantic.Lightship.AR.Samples
         [Tooltip("Stop Scan Button")]
         [SerializeField]
         private Button _stopScanButton;
+        
+        [Tooltip("Share Playback Button")]
+        [SerializeField]
+        private Button _sharePlaybackButton;
+        [SerializeField]
+        private Image _loadingIcon;
+
+        private bool _isSharing;
 
         private ScanStore _scanStore;
         private ScanStore.SavedScan _savedScan;
@@ -68,6 +84,31 @@ namespace Niantic.Lightship.AR.Samples
         {
             _scanStore = _arScanningManager.GetScanStore();
             _arCameraManager.frameReceived += OnCameraFrameReceived;
+            
+            _sharePlaybackButton.gameObject.SetActive(false);
+            _sharePlaybackButton.onClick.AddListener(OnSharedPlaybackButtonClicked);
+        }
+
+        private async void OnSharedPlaybackButtonClicked()
+        {
+            // Do nothing if the button is sharing playback.
+            if (_isSharing) return;
+            
+            _sharePlaybackButton.gameObject.GetComponent<SpriteToggler>().SpriteChange();
+            _isSharing = true;
+            _loadingIcon.gameObject.SetActive(true);
+            _sharePlaybackButton.interactable = false;
+
+            string path = await Task.Run(ZipPlayback);
+            if (!string.IsNullOrEmpty(path))
+            {
+                ShareZippedPlayback(path);
+            }
+
+            _sharePlaybackButton.interactable = true;
+            _loadingIcon.gameObject.SetActive(false);
+            _isSharing = false;
+            _sharePlaybackButton.gameObject.GetComponent<SpriteToggler>().SpriteChange();
         }
 
         private void OnCameraFrameReceived(ARCameraFrameEventArgs args)
@@ -138,20 +179,30 @@ namespace Niantic.Lightship.AR.Samples
 
         private void HandleCameraPermissionGranted()
         {
-            _arScanningManager.ScanRecordingFramerate = _scanRecordingFramerate;
+            _arScanningManager.ScanRecordingFramerate = (int)_framerateSlider.value;
             _arScanningManager.enabled = true;
         }
 
         public void StartScanning()
         {
+            // Disable Sharing button
+            _sharePlaybackButton.gameObject.SetActive(false);
+
+            _maxTimePerChunkSlider.interactable = false;
+            _framerateSlider.interactable = false;
+            
             _saveScanPanel.SetActive(false);
             CheckCameraPermission();
         }
 
         public async void StopScanning()
         {
-             await _arScanningManager.SaveScan();
+            await _arScanningManager.SaveScan();
             _arScanningManager.enabled = false;
+            
+            _maxTimePerChunkSlider.interactable = true;
+            _framerateSlider.interactable = true;
+            
             _saveScanPanel.SetActive(true);
             string scanID = _arScanningManager.GetCurrentScanId();
             _savedScan = _scanStore.GetSavedScans().First(s => s.ScanId == scanID);
@@ -168,7 +219,7 @@ namespace Niantic.Lightship.AR.Samples
             _performScanPanel.SetActive(false);
             _saveScanPanel.SetActive(false);
             _exportScanPanel.SetActive(true);
-            int maxFramesPerChunk = (int)(_maxTimePerChunk * _scanRecordingFramerate);
+            int maxFramesPerChunk = (int)(_maxTimePerChunkSlider.value * _framerateSlider.value);;
             using var exportPayloadBuilder = new ScanArchiveBuilder(_savedScan, new UploadUserInfo(), maxFramesPerChunk);
             _exportScanPanelTitleText.text = "Exporting...";
             string message = string.Empty;
@@ -182,6 +233,63 @@ namespace Niantic.Lightship.AR.Samples
                 _exportScanPanelBodyText.text = message;
             }
             _exportScanPanelTitleText.text = !string.IsNullOrEmpty(message) ? "Exporting Completed" : "Exporting Failed";
+            
+#if UNITY_IOS && !UNITY_EDITOR
+            // Enable Sharing button
+            _sharePlaybackButton.gameObject.SetActive(true);
+#endif
+        }
+
+        private string ZipPlayback()
+        {
+            if (_savedScan == null)
+            {
+                Debug.LogWarning("Please create a playback recording first.");
+                return null;
+            }
+            
+            string savedScanPath = _savedScan.ScanPath;
+            string outputZipFilename = Path.GetFileName(savedScanPath) + ".zip";
+            string outputZipFilePath = Path.Join(Path.Join(savedScanPath, ".."), outputZipFilename);
+            
+            // If file already exists, use it. Otherwise, create a new one.
+            if (!File.Exists(outputZipFilePath))
+            {
+                ZipUtility.CompressFolderToZip(outputZipFilePath, null, savedScanPath);
+            }
+            
+            return outputZipFilePath;
+        }
+
+        private void ShareZippedPlayback(string path)
+        {
+            if (File.Exists(path))
+            {
+#if UNITY_IOS && !UNITY_EDITOR
+                IOSShare.ShareFile(path, "Sharing Playback Recording as zip");
+#else
+                Debug.LogError("This platform doesn't support sharing");
+#endif
+            }
+            else
+            {
+                Debug.LogError($"File {path} does not exist");
+            }
+        }
+        
+        public void OnFramerateChange()
+        {
+            _framerateText.text = "Framerate: " + _framerateSlider.value;
+        }
+
+        public void OnChunkTimeChange()
+        {
+            _maxTimePerChunkText.text = "Chunk Time: " + _maxTimePerChunkSlider.value + "s";
+        }
+
+        private void OnDestroy()
+        {
+            _sharePlaybackButton.onClick.RemoveListener(OnSharedPlaybackButtonClicked);
         }
     }
 }
