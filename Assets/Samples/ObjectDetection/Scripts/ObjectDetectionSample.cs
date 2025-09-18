@@ -54,7 +54,7 @@ public class ObjectDetectionSample: MonoBehaviour
     private string _categoryName = string.Empty;
     private void Awake()
     {
-        _canvas = FindObjectOfType<Canvas>();
+        _canvas = FindFirstObjectByType<Canvas>();
 
 
         _probabilityThresholdSlider.value = _probabilityThreshold;

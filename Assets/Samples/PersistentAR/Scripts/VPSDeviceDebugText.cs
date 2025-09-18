@@ -39,7 +39,7 @@ public class VPSDeviceDebugText : MonoBehaviour
         _trackingStateText.text = "Waiting for AR Session state";
         if (_arPersistentAnchorManager == null)
         {
-            _arPersistentAnchorManager = FindObjectOfType<ARPersistentAnchorManager>();
+            _arPersistentAnchorManager = FindFirstObjectByType<ARPersistentAnchorManager>();
             if (_arPersistentAnchorManager == null)
             {
                 _anchorPoseText.text = "Could not find ARPersistentAnchorManager";
@@ -52,7 +52,7 @@ public class VPSDeviceDebugText : MonoBehaviour
 
         if (_xrOrigin == null)
         {
-            _xrOrigin = FindObjectOfType<XROrigin>();
+            _xrOrigin = FindFirstObjectByType<XROrigin>();
             if (_xrOrigin == null)
             {
                 if (_xrOrigin == null)

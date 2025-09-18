@@ -1,6 +1,7 @@
 // Copyright 2022-2025 Niantic.
 
 using UnityEngine;
+using Input = Niantic.Lightship.AR.Input;
 
 namespace WorldPoseSamples
 {

@@ -34,11 +34,6 @@ public class DatastoreManager : MonoBehaviour
     public bool _networkRunning;
     private bool _inRoom=false;
     
-    private bool _sendNewMap=false;
-    private bool _waitForMap=false;
-
-    private Transform _tempRoot = null;
-    
     /// <summary>
     /// CreateOrJoinDataStore
     /// Will create new network Room and Datastore based on the string name you provice

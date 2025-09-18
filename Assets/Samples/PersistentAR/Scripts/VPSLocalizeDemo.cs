@@ -212,7 +212,7 @@ public class VPSLocalizeDemo : MonoBehaviour
             // Make sure necessary rendering settings are enabled for transparency
             mr.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
             mr.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-            mr.material.SetInt("_ZWrite", 0);
+            mr.material.SetInt("_ZWrite", 1);
             mr.material.DisableKeyword("_ALPHATEST_ON");
             mr.material.EnableKeyword("_ALPHABLEND_ON");
             mr.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");

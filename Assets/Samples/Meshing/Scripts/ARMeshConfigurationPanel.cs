@@ -26,7 +26,7 @@ public class ARMeshConfigurationPanel : MonoBehaviour
 
     public void Start()
     {
-        _lightshipMeshingExtension = FindObjectOfType<LightshipMeshingExtension>();
+        _lightshipMeshingExtension = FindFirstObjectByType<LightshipMeshingExtension>();
 
         _frameRateValue = GameObject.Find("Frame Rate Value").GetComponent<InputField>();
         _frameRateValue.text = _lightshipMeshingExtension.TargetFrameRate.ToString();

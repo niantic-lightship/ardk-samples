@@ -26,6 +26,7 @@ public class PostBuildProcess : MonoBehaviour
         var rootDict = plist.root;
         rootDict.SetBoolean("UIFileSharingEnabled", true);
         rootDict.SetBoolean("LSSupportsOpeningDocumentsInPlace", true);
+        rootDict.SetBoolean("ITSAppUsesNonExemptEncryption", false);
         File.WriteAllText(plistPath, plist.WriteToString());
     }
 }

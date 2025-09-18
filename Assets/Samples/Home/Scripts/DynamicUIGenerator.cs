@@ -122,7 +122,6 @@ public class DynamicUIGenerator : MonoBehaviour
         CanvasScaler canvasScaler = canvasGo.AddComponent<CanvasScaler>();
         canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         canvasScaler.referenceResolution = new Vector2(1920,1080);
-        canvasScaler = canvasScaler;
         
         canvasGo.AddComponent<GraphicRaycaster>();
         var canvasImg = canvasGo.AddComponent<Image>();

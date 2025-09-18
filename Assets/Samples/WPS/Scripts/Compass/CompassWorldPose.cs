@@ -25,7 +25,7 @@ namespace WorldPoseSamples
             float heading = _cameraHelper.TrueHeading;
             _compassImage.rectTransform.rotation = Quaternion.Euler(0, 0, heading);
 
-            _coordinatesText.text = "Latitude: " + _cameraHelper.Latitude + "\nLongitude: " + _cameraHelper.Longitude;
+            _coordinatesText.text = "Latitude: " + _cameraHelper.Latitude.ToString("G10") + "\nLongitude: " + _cameraHelper.Longitude.ToString("G10");
         }
     }
 }

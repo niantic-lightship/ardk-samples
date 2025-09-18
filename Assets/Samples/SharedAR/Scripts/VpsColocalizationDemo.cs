@@ -26,7 +26,7 @@ namespace  Niantic.Lightship.AR.Samples
             {
                 if (_arLocationManager == null)
                 {
-                    _arLocationManager = FindObjectOfType<ARLocationManager>();
+                    _arLocationManager = FindFirstObjectByType<ARLocationManager>();
                 }
 
                 return _arLocationManager;

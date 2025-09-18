@@ -284,7 +284,7 @@ namespace Niantic.Lightship.AR.Samples
 
         public void OnChunkTimeChange()
         {
-            _maxTimePerChunkText.text = "Chunk Time: " + _maxTimePerChunkSlider.value + "s";
+            _maxTimePerChunkText.text = "Max Chunk Time: " + _maxTimePerChunkSlider.value + "s";
         }
 
         private void OnDestroy()
