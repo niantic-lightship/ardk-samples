@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4f5a33dce899fdf3e77d5e002733bae597f7aa01d7a4537f3ab00553d20b77b2
-size 412
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c1d1bd77ad24f56a0b832a9c231f5b, type: 3}
+  m_Name: Lightship AR Kit Loader
+  m_EditorClassIdentifier: 
